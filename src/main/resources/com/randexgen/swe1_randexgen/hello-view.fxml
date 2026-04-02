@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.StackPane?>
+
+<BorderPane style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.randexgen.swe1_randexgen.controller.helloViewController">
+
+    <!-- ===== TOP: Header mit XML / PDF / RandExGen ===== -->
+    <top>
+        <Pane prefHeight="26.0" style="-fx-background-color: #828282;">
+            <children>
+                <!-- XML / PDF Tabs -->
+                <Pane prefHeight="26.0" prefWidth="200.0" style="-fx-background-color: #828282;">
+                    <children>
+                        <!-- XML-Tab -->
+                        <Pane prefHeight="26.0" prefWidth="94.0" style="-fx-background-color: #ddded4;">
+                            <children>
+                                <Text layoutX="36.0" layoutY="18.0" text="XML">
+                                    <font>
+                                        <Font name="System Bold" size="14.0" />
+                                    </font>
+                                </Text>
+                            </children>
+                        </Pane>
+
+                        <!-- PDF-Tab -->
+                        <Pane fx:id="pdfPane" onMouseClicked="#handlePdfClick" layoutX="100.0" prefHeight="26.0" prefWidth="94.0" style="-fx-background-color: #a3a69c; -fx-cursor: hand;">
+                            <children>
+                                <Text layoutX="36.0" layoutY="18.0" text="PDF">
+                                    <font>
+                                        <Font name="System Bold" size="14.0" />
+                                    </font>
+                                </Text>
+                            </children>
+                        </Pane>
+                    </children>
+                </Pane>
+            </children>
+        </Pane>
+    </top>
+
+    <!-- ===== CENTER: Content (Buttons + Texte) ===== -->
+    <center>
+        <StackPane>
+            <children>
+                <VBox alignment="CENTER" spacing="20.0">
+                    <padding>
+                        <Insets bottom="40.0" left="20.0" right="20.0" top="40.0" />
+                    </padding>
+
+                    <Button alignment="CENTER" onAction="#createXmlFile" prefHeight="44.0" prefWidth="155.0" style="-fx-background-color: #28282B; -fx-background-radius: 8;" text="Create XML File" textFill="WHITE">
+                        <cursor>
+                            <Cursor fx:constant="OPEN_HAND" />
+                        </cursor>
+                        <graphic>
+                            <ImageView fitHeight="36.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@../../../images/image1.png" />
+                                </image>
+                            </ImageView>
+                        </graphic>
+                    </Button>
+
+                    <Text text="You do not have an XML File? Select this option to create one for the exam generation!">
+                        <VBox.margin>
+                            <Insets bottom="30.0" />
+                        </VBox.margin>
+                    </Text>
+
+                    <Text text="or">
+                        <font>
+                            <Font size="18.0" />
+                        </font>
+                        <VBox.margin>
+                            <Insets bottom="30.0" />
+                        </VBox.margin>
+                    </Text>
+
+                    <Button alignment="CENTER" onAction="#chooseFile" prefHeight="44.0" prefWidth="155.0" style="-fx-background-color: #28282B; -fx-background-radius: 8;" text="Load XML File" textFill="WHITE">
+                        <cursor>
+                            <Cursor fx:constant="OPEN_HAND" />
+                        </cursor>
+                        <graphic>
+                            <ImageView fitHeight="36.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@../../../images/image2.png" />
+                                </image>
+                            </ImageView>
+                        </graphic>
+                    </Button>
+
+                    <Text text="You already have an XML File? Select this option to use it for the exam generation!">
+                        <VBox.margin>
+                            <Insets bottom="30.0" />
+                        </VBox.margin>
+                    </Text>
+
+                    <Label fx:id="welcomeText" />
+                </VBox>
+            </children>
+        </StackPane>
+    </center>
+
+</BorderPane>

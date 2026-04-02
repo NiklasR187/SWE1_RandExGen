@@ -1,0 +1,84 @@
+Date : 2026-04-01 23:05:02
+Directory : c:\Users\nikre\IdeaProjects\SWE1_RandExGen
+Total : 37 files,  3448 codes, 1713 comments, 882 blanks, all 6043 lines
+
+Languages
++-----------------+------------+------------+------------+------------+------------+
+| language        | files      | code       | comment    | blank      | total      |
++-----------------+------------+------------+------------+------------+------------+
+| Java            |         26 |      2,564 |      1,614 |        736 |      4,914 |
+| XML             |          7 |        460 |          8 |         53 |        521 |
+| PostCSS         |          2 |        320 |         40 |         57 |        417 |
+| Batch           |          1 |        102 |         51 |         36 |        189 |
+| Java Properties |          1 |          2 |          0 |          0 |          2 |
++-----------------+------------+------------+------------+------------+------------+
+
+Directories
++---------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                      | files      | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                         |         37 |      3,448 |      1,713 |        882 |      6,043 |
+| . (Files)                                                                                                                 |          2 |        178 |         52 |         41 |        271 |
+| .idea                                                                                                                     |          3 |         27 |          0 |          0 |         27 |
+| .mvn                                                                                                                      |          1 |          2 |          0 |          0 |          2 |
+| .mvn\wrapper                                                                                                              |          1 |          2 |          0 |          0 |          2 |
+| src                                                                                                                       |         31 |      3,241 |      1,661 |        841 |      5,743 |
+| src\main                                                                                                                  |         31 |      3,241 |      1,661 |        841 |      5,743 |
+| src\main\java                                                                                                             |         26 |      2,564 |      1,614 |        736 |      4,914 |
+| src\main\java (Files)                                                                                                     |          1 |         15 |          0 |          2 |         17 |
+| src\main\java\com                                                                                                         |         25 |      2,549 |      1,614 |        734 |      4,897 |
+| src\main\java\com\randexgen                                                                                               |         25 |      2,549 |      1,614 |        734 |      4,897 |
+| src\main\java\com\randexgen\swe1_randexgen                                                                                |         25 |      2,549 |      1,614 |        734 |      4,897 |
+| src\main\java\com\randexgen\swe1_randexgen\app                                                                            |          3 |         37 |         42 |         13 |         92 |
+| src\main\java\com\randexgen\swe1_randexgen\controller                                                                     |          4 |      1,276 |        445 |        325 |      2,046 |
+| src\main\java\com\randexgen\swe1_randexgen\datamodel                                                                      |          8 |        231 |        297 |         72 |        600 |
+| src\main\java\com\randexgen\swe1_randexgen\service                                                                        |         10 |      1,005 |        830 |        324 |      2,159 |
+| src\main\resources                                                                                                        |          5 |        677 |         47 |        105 |        829 |
+| src\main\resources\com                                                                                                    |          5 |        677 |         47 |        105 |        829 |
+| src\main\resources\com\randexgen                                                                                          |          5 |        677 |         47 |        105 |        829 |
+| src\main\resources\com\randexgen\swe1_randexgen                                                                           |          5 |        677 |         47 |        105 |        829 |
++---------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++---------------------------------------------------------------------------------------------------------------------------+-----------------+------------+------------+------------+------------+
+| filename                                                                                                                  | language        | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------------------------------------------+-----------------+------------+------------+------------+------------+
+| c:\Users\nikre\IdeaProjects\SWE1_RandExGen\.idea\encodings.xml                                                            | XML             |          7 |          0 |          0 |          7 |
+| c:\Users\nikre\IdeaProjects\SWE1_RandExGen\.idea\misc.xml                                                                 | XML             |         14 |          0 |          0 |         14 |
+| c:\Users\nikre\IdeaProjects\SWE1_RandExGen\.idea\vcs.xml                                                                  | XML             |          6 |          0 |          0 |          6 |
+| c:\Users\nikre\IdeaProjects\SWE1_RandExGen\.mvn\wrapper\maven-wrapper.properties                                          | Java Properties |          2 |          0 |          0 |          2 |
+| c:\Users\nikre\IdeaProjects\SWE1_RandExGen\mvnw.cmd                                                                       | Batch           |        102 |         51 |         36 |        189 |
+| c:\Users\nikre\IdeaProjects\SWE1_RandExGen\pom.xml                                                                        | XML             |         76 |          1 |          5 |         82 |
+| c:\Users\nikre\IdeaProjects\SWE1_RandExGen\src\main\java\com\randexgen\swe1_randexgen\app\AppController.java              | Java            |         11 |         12 |          4 |         27 |
+| c:\Users\nikre\IdeaProjects\SWE1_RandExGen\src\main\java\com\randexgen\swe1_randexgen\app\HelloApplication.java           | Java            |         25 |         24 |          9 |         58 |
+| c:\Users\nikre\IdeaProjects\SWE1_RandExGen\src\main\java\com\randexgen\swe1_randexgen\app\package-info.java               | Java            |          1 |          6 |          0 |          7 |
+| c:\Users\nikre\IdeaProjects\SWE1_RandExGen\src\main\java\com\randexgen\swe1_randexgen\controller\PdfviewerController.java | Java            |        288 |        101 |         82 |        471 |
+| c:\Users\nikre\IdeaProjects\SWE1_RandExGen\src\main\java\com\randexgen\swe1_randexgen\controller\frame2Controller.java    | Java            |        878 |        278 |        214 |      1,370 |
+| c:\Users\nikre\IdeaProjects\SWE1_RandExGen\src\main\java\com\randexgen\swe1_randexgen\controller\helloViewController.java | Java            |        109 |         60 |         29 |        198 |
+| c:\Users\nikre\IdeaProjects\SWE1_RandExGen\src\main\java\com\randexgen\swe1_randexgen\controller\package-info.java        | Java            |          1 |          6 |          0 |          7 |
+| c:\Users\nikre\IdeaProjects\SWE1_RandExGen\src\main\java\com\randexgen\swe1_randexgen\datamodel\Chapter.java              | Java            |         71 |         89 |         22 |        182 |
+| c:\Users\nikre\IdeaProjects\SWE1_RandExGen\src\main\java\com\randexgen\swe1_randexgen\datamodel\DifficultyLevel.java      | Java            |          6 |          0 |          2 |          8 |
+| c:\Users\nikre\IdeaProjects\SWE1_RandExGen\src\main\java\com\randexgen\swe1_randexgen\datamodel\Exam.java                 | Java            |         37 |         53 |         12 |        102 |
+| c:\Users\nikre\IdeaProjects\SWE1_RandExGen\src\main\java\com\randexgen\swe1_randexgen\datamodel\ExamAppearance.java       | Java            |          5 |          0 |          3 |          8 |
+| c:\Users\nikre\IdeaProjects\SWE1_RandExGen\src\main\java\com\randexgen\swe1_randexgen\datamodel\ExamType.java             | Java            |          5 |          0 |          2 |          7 |
+| c:\Users\nikre\IdeaProjects\SWE1_RandExGen\src\main\java\com\randexgen\swe1_randexgen\datamodel\Subtask.java              | Java            |         60 |         85 |         18 |        163 |
+| c:\Users\nikre\IdeaProjects\SWE1_RandExGen\src\main\java\com\randexgen\swe1_randexgen\datamodel\Variant.java              | Java            |         46 |         64 |         13 |        123 |
+| c:\Users\nikre\IdeaProjects\SWE1_RandExGen\src\main\java\com\randexgen\swe1_randexgen\datamodel\package-info.java         | Java            |          1 |          6 |          0 |          7 |
+| c:\Users\nikre\IdeaProjects\SWE1_RandExGen\src\main\java\com\randexgen\swe1_randexgen\service\AppState.java               | Java            |         23 |         35 |          9 |         67 |
+| c:\Users\nikre\IdeaProjects\SWE1_RandExGen\src\main\java\com\randexgen\swe1_randexgen\service\DataValidator.java          | Java            |        119 |        102 |         35 |        256 |
+| c:\Users\nikre\IdeaProjects\SWE1_RandExGen\src\main\java\com\randexgen\swe1_randexgen\service\ExamGenerator.java          | Java            |        236 |        192 |         66 |        494 |
+| c:\Users\nikre\IdeaProjects\SWE1_RandExGen\src\main\java\com\randexgen\swe1_randexgen\service\ExportMode.java             | Java            |          5 |         12 |          3 |         20 |
+| c:\Users\nikre\IdeaProjects\SWE1_RandExGen\src\main\java\com\randexgen\swe1_randexgen\service\GeneratedTask.java          | Java            |         23 |         29 |          7 |         59 |
+| c:\Users\nikre\IdeaProjects\SWE1_RandExGen\src\main\java\com\randexgen\swe1_randexgen\service\PDFExporter.java            | Java            |        288 |        208 |         87 |        583 |
+| c:\Users\nikre\IdeaProjects\SWE1_RandExGen\src\main\java\com\randexgen\swe1_randexgen\service\ScoreCalculator.java        | Java            |        122 |         81 |         37 |        240 |
+| c:\Users\nikre\IdeaProjects\SWE1_RandExGen\src\main\java\com\randexgen\swe1_randexgen\service\XMLFileValidator.java       | Java            |        106 |        100 |         43 |        249 |
+| c:\Users\nikre\IdeaProjects\SWE1_RandExGen\src\main\java\com\randexgen\swe1_randexgen\service\XMLParser.java              | Java            |         82 |         65 |         37 |        184 |
+| c:\Users\nikre\IdeaProjects\SWE1_RandExGen\src\main\java\com\randexgen\swe1_randexgen\service\package-info.java           | Java            |          1 |          6 |          0 |          7 |
+| c:\Users\nikre\IdeaProjects\SWE1_RandExGen\src\main\java\module-info.java                                                 | Java            |         15 |          0 |          2 |         17 |
+| c:\Users\nikre\IdeaProjects\SWE1_RandExGen\src\main\resources\com\randexgen\swe1_randexgen\Frame2.fxml                    | XML             |         84 |          0 |         13 |         97 |
+| c:\Users\nikre\IdeaProjects\SWE1_RandExGen\src\main\resources\com\randexgen\swe1_randexgen\hello-view.fxml                | XML             |         97 |          5 |         13 |        115 |
+| c:\Users\nikre\IdeaProjects\SWE1_RandExGen\src\main\resources\com\randexgen\swe1_randexgen\pdfviewer.fxml                 | XML             |        176 |          2 |         22 |        200 |
+| c:\Users\nikre\IdeaProjects\SWE1_RandExGen\src\main\resources\com\randexgen\swe1_randexgen\styles.css                     | PostCSS         |        148 |          8 |         29 |        185 |
+| c:\Users\nikre\IdeaProjects\SWE1_RandExGen\src\main\resources\com\randexgen\swe1_randexgen\styles2.css                    | PostCSS         |        172 |         32 |         28 |        232 |
+| Total                                                                                                                     |                 |      3,448 |      1,713 |        882 |      6,043 |
++---------------------------------------------------------------------------------------------------------------------------+-----------------+------------+------------+------------+------------+
