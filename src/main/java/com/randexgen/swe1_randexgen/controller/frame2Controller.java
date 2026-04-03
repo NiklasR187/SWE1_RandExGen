@@ -19,6 +19,8 @@ import javafx.stage.Stage;
 import java.util.Optional;
 import javafx.stage.FileChooser;
 import java.io.FileWriter;
+
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.scene.control.Label;
 import java.util.List;
@@ -30,6 +32,7 @@ import javafx.scene.image.ImageView;
 import java.io.File;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ScrollPane;
+import javafx.util.Duration;
 import java.io.FileInputStream;
 import java.util.HashMap;
 import java.util.Map;
@@ -55,6 +58,9 @@ public class frame2Controller {
 
     @FXML
     private HBox bottomActionBox;
+
+    @FXML
+    private Label saveStatusLabel;
 
     @FXML
     private Pane pdfPane;
@@ -125,7 +131,10 @@ public class frame2Controller {
         try {
             // Save the current exam state into the existing XML file
             saveExamToFile(currentXmlFile);
-            System.out.println("Saved: " + currentXmlFile.getAbsolutePath());
+            saveStatusLabel.setText("Saved: " + currentXmlFile.getName() + " ✓");
+            PauseTransition pause = new PauseTransition(Duration.seconds(2));
+            pause.setOnFinished(event -> saveStatusLabel.setText(""));
+            pause.play();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -160,7 +169,12 @@ public class frame2Controller {
             if (selectedFile != null) {
                 saveExamToFile(selectedFile);
                 currentXmlFile = selectedFile;
-                System.out.println("Saved As: " + selectedFile.getAbsolutePath());
+
+                saveStatusLabel.setText("Saved: " + selectedFile.getName() + " ✓");
+
+                PauseTransition pause = new PauseTransition(Duration.seconds(2));
+                pause.setOnFinished(event -> saveStatusLabel.setText(""));
+                pause.play();
             }
 
         } catch (Exception e) {
@@ -1388,20 +1402,28 @@ public class frame2Controller {
      */
     @FXML
     private void switchToPDF() {
-        try {
-            // Store the current exam data before switching scenes
+            try {
+
             AppState.setCurrentExam(currentExam);
             AppState.setCurrentXmlFile(currentXmlFile);
 
+            // Load the second FXML view and create its scene
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/randexgen/swe1_randexgen/pdfviewer.fxml"));
             Scene scene = new Scene(loader.load());
 
-            // Replace the current scene with the PDF preview view
+            PdfviewerController controller = loader.getController();
+
+            // Replace the current scene with the second application view
             Stage stage = (Stage) pdfPane.getScene().getWindow();
+            stage.setResizable(true);
             stage.setScene(scene);
             stage.show();
 
-            Platform.runLater(() -> stage.setMaximized(true));
+            // Refresh the maximized state and load the XML file afterwards
+            javafx.application.Platform.runLater(() -> {
+                stage.setMaximized(false);
+                stage.setMaximized(true);
+            });
 
         } catch (Exception e) {
             e.printStackTrace();
