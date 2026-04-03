@@ -19,13 +19,13 @@ import static org.junit.jupiter.api.Assertions.*;
  *
  * This class verifies the validation logic for subtasks, chapters, and exams.
  * It checks valid and invalid cases for usability, chapter validity,
- * exam validity, and warning text generation.
+ * exam validity, chapter counting, and warning texts.
  */
 class DataValidatorTest {
 
     /**
-     * Tests whether a subtask is considered usable
-     * when it contains at least one variant with non-empty task text.
+     * Tests whether a subtask is usable when it contains at least one variant
+     * with non-empty task text.
      */
     @Test
     void isSubtaskUsable_shouldReturnTrue_whenVariantContainsTaskText() {
@@ -44,8 +44,7 @@ class DataValidatorTest {
     }
 
     /**
-     * Tests whether a subtask is considered unusable
-     * when it has no variants.
+     * Tests whether a subtask is unusable when it has no variants.
      */
     @Test
     void isSubtaskUsable_shouldReturnFalse_whenVariantsAreMissing() {
@@ -61,8 +60,7 @@ class DataValidatorTest {
     }
 
     /**
-     * Tests whether a subtask is considered unusable
-     * when all variants contain only blank task text.
+     * Tests whether a subtask is unusable when all variants contain only blank task text.
      */
     @Test
     void isSubtaskUsable_shouldReturnFalse_whenAllTaskTextsAreBlank() {
@@ -112,9 +110,8 @@ class DataValidatorTest {
     }
 
     /**
-     * Tests whether a chapter is valid
-     * when it has at least one usable subtask for each difficulty level
-     * and a balanced distribution.
+     * Tests whether a chapter is valid when it has at least one usable subtask
+     * for each difficulty level and a balanced distribution.
      */
     @Test
     void isChapterValid_shouldReturnTrue_forValidChapter() {
@@ -129,8 +126,7 @@ class DataValidatorTest {
     }
 
     /**
-     * Tests whether a chapter is invalid
-     * when one difficulty level is missing.
+     * Tests whether a chapter is invalid when one difficulty level is missing.
      */
     @Test
     void isChapterValid_shouldReturnFalse_whenOneDifficultyIsMissing() {
@@ -148,8 +144,7 @@ class DataValidatorTest {
     }
 
     /**
-     * Tests whether a chapter is invalid
-     * when the difficulty distribution is not balanced.
+     * Tests whether a chapter is invalid when the difficulty distribution is unbalanced.
      */
     @Test
     void isChapterValid_shouldReturnFalse_whenDistributionIsInvalid() {
@@ -165,7 +160,7 @@ class DataValidatorTest {
         chapter.getSubtasks().add(createUsableSubtask("m1", 1.0, DifficultyLevel.MEDIUM, ExamType.REGULAR));
         chapter.getSubtasks().add(createUsableSubtask("h1", 1.0, DifficultyLevel.HARD, ExamType.REGULAR));
 
-        // easy=4, medium=1, hard=1 => invalid because max-min = 3
+        // easy=4, medium=1, hard=1 -> invalid because max-min = 3
         // Act
         boolean result = DataValidator.isChapterValid(chapter, ExamType.REGULAR);
 
@@ -174,8 +169,7 @@ class DataValidatorTest {
     }
 
     /**
-     * Tests whether an exam is valid
-     * when it has at least four included valid chapters.
+     * Tests whether an exam is valid when it has at least four included valid chapters.
      */
     @Test
     void isExamValid_shouldReturnTrue_whenAtLeastFourIncludedChaptersAreValid() {
@@ -196,8 +190,7 @@ class DataValidatorTest {
     }
 
     /**
-     * Tests whether an exam is invalid
-     * when fewer than four chapters are included.
+     * Tests whether an exam is invalid when fewer than four chapters are included.
      */
     @Test
     void isExamValid_shouldReturnFalse_whenLessThanFourIncludedChaptersExist() {
@@ -217,8 +210,7 @@ class DataValidatorTest {
     }
 
     /**
-     * Tests whether an exam is invalid
-     * when one included chapter is invalid.
+     * Tests whether an exam is invalid when one included chapter is invalid.
      */
     @Test
     void isExamValid_shouldReturnFalse_whenOneIncludedChapterIsInvalid() {
@@ -301,18 +293,18 @@ class DataValidatorTest {
     }
 
     /**
-     * Tests whether an empty warning text is returned
-     * for a valid exam.
+     * Tests whether an empty warning text is returned for an exam
+     * that is valid for both REGULAR and PRACTICE exam generation.
      */
     @Test
     void getExamWarningText_shouldReturnEmptyString_whenExamIsValid() {
         // Arrange
         Exam exam = new Exam();
         exam.setChapters(new ArrayList<>(List.of(
-                createIncludedValidChapter(ExamType.REGULAR),
-                createIncludedValidChapter(ExamType.REGULAR),
-                createIncludedValidChapter(ExamType.REGULAR),
-                createIncludedValidChapter(ExamType.REGULAR)
+                createIncludedChapterValidForBothExamTypes(),
+                createIncludedChapterValidForBothExamTypes(),
+                createIncludedChapterValidForBothExamTypes(),
+                createIncludedChapterValidForBothExamTypes()
         )));
 
         // Act
@@ -323,7 +315,7 @@ class DataValidatorTest {
     }
 
     /**
-     * Creates a valid included chapter for the given exam type.
+     * Creates a valid included chapter for a single exam type.
      *
      * @param examType the exam type for which the chapter should be valid
      * @return a valid included chapter
@@ -335,7 +327,7 @@ class DataValidatorTest {
     }
 
     /**
-     * Creates a valid chapter for the given exam type
+     * Creates a valid chapter for a single exam type
      * with one usable subtask per difficulty level.
      *
      * @param examType the exam type to use for the subtasks
@@ -348,6 +340,28 @@ class DataValidatorTest {
         chapter.getSubtasks().add(createUsableSubtask("s1", 2.0, DifficultyLevel.EASY, examType));
         chapter.getSubtasks().add(createUsableSubtask("s2", 3.0, DifficultyLevel.MEDIUM, examType));
         chapter.getSubtasks().add(createUsableSubtask("s3", 4.0, DifficultyLevel.HARD, examType));
+
+        return chapter;
+    }
+
+    /**
+     * Creates a valid included chapter that is valid
+     * for both REGULAR and PRACTICE exam types.
+     *
+     * @return a valid included chapter for both exam types
+     */
+    private Chapter createIncludedChapterValidForBothExamTypes() {
+        Chapter chapter = new Chapter();
+        chapter.setExamAppearance(ExamAppearance.INCLUDE);
+        chapter.setSubtasks(new ArrayList<>());
+
+        chapter.getSubtasks().add(createUsableSubtask("e-p", 2.0, DifficultyLevel.EASY, ExamType.PRACTICE));
+        chapter.getSubtasks().add(createUsableSubtask("m-p", 3.0, DifficultyLevel.MEDIUM, ExamType.PRACTICE));
+        chapter.getSubtasks().add(createUsableSubtask("h-p", 4.0, DifficultyLevel.HARD, ExamType.PRACTICE));
+
+        chapter.getSubtasks().add(createUsableSubtask("e-r", 2.0, DifficultyLevel.EASY, ExamType.REGULAR));
+        chapter.getSubtasks().add(createUsableSubtask("m-r", 3.0, DifficultyLevel.MEDIUM, ExamType.REGULAR));
+        chapter.getSubtasks().add(createUsableSubtask("h-r", 4.0, DifficultyLevel.HARD, ExamType.REGULAR));
 
         return chapter;
     }

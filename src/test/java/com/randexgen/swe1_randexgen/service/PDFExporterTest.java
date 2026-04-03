@@ -86,9 +86,28 @@ class PDFExporterTest {
     @Test
     void exportExam_shouldThrowException_whenOutputFileIsNull() {
         Exam exam = new Exam();
+        exam.setTitle("Test Exam");
+
+        Chapter chapter = new Chapter();
+        chapter.setId("c1");
+        chapter.setTitle("Chapter 1");
+
+        Subtask subtask = new Subtask();
+        subtask.setId("s1");
+        subtask.setTitle("Subtask 1");
+        subtask.setScore(5.0);
+
+        Variant variant = new Variant();
+        variant.setId("v1");
+        variant.setTaskText("Task");
+        variant.setAnswerText("Answer");
+        variant.setSolutionText("Solution");
+
+        GeneratedTask task = new GeneratedTask(chapter, subtask, variant);
+        List<GeneratedTask> tasks = List.of(task);
 
         Exception ex = assertThrows(IllegalArgumentException.class, () ->
-                PDFExporter.exportExam(exam, ExamType.REGULAR, new ArrayList<>(), null, ExportMode.EXAM)
+                PDFExporter.exportExam(exam, ExamType.REGULAR, tasks, null, ExportMode.EXAM)
         );
 
         assertEquals("Output-Datei darf nicht null sein.", ex.getMessage());
@@ -100,10 +119,30 @@ class PDFExporterTest {
     @Test
     void exportExam_shouldThrowException_whenExportModeIsNull() {
         Exam exam = new Exam();
+        exam.setTitle("Test Exam");
+
+        Chapter chapter = new Chapter();
+        chapter.setId("c1");
+        chapter.setTitle("Chapter 1");
+
+        Subtask subtask = new Subtask();
+        subtask.setId("s1");
+        subtask.setTitle("Subtask 1");
+        subtask.setScore(5.0);
+
+        Variant variant = new Variant();
+        variant.setId("v1");
+        variant.setTaskText("Task");
+        variant.setAnswerText("Answer");
+        variant.setSolutionText("Solution");
+
+        GeneratedTask task = new GeneratedTask(chapter, subtask, variant);
+        List<GeneratedTask> tasks = List.of(task);
+
         File file = new File("test.pdf");
 
         Exception ex = assertThrows(IllegalArgumentException.class, () ->
-                PDFExporter.exportExam(exam, ExamType.REGULAR, new ArrayList<>(), file, null)
+                PDFExporter.exportExam(exam, ExamType.REGULAR, tasks, file, null)
         );
 
         assertEquals("ExportMode darf nicht null sein.", ex.getMessage());
