@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exam id="exam-practice-only-001">
+    <title>Practice Valid, Regular Invalid</title>
+    <chapters>
+        <chapter id="ch-01">
+            <title>Assembler Grundlagen</title>
+            <examAppearance>INCLUDE</examAppearance>
+            <selectedRegularScore>2.0</selectedRegularScore>
+            <subtasks>
+                <subtask id="st-01">
+                    <title>Regular Easy</title>
+                    <score>1.0</score>
+                    <difficultyLevel>EASY</difficultyLevel>
+                    <examType>REGULAR</examType>
+                    <variants>
+                        <variant id="var-01">
+                            <taskText>Was ist ein Register?</taskText>
+                            <answerText></answerText>
+                            <solutionText>Ein Register ist ein sehr schneller Speicher in der CPU.</solutionText>
+                        </variant>
+                    </variants>
+                </subtask>
+                <subtask id="st-02">
+                    <title>Regular Medium</title>
+                    <score>1.0</score>
+                    <difficultyLevel>MEDIUM</difficultyLevel>
+                    <examType>REGULAR</examType>
+                    <variants>
+                        <variant id="var-02">
+                            <taskText>Wozu dient der Befehlszähler?</taskText>
+                            <answerText></answerText>
+                            <solutionText>Er zeigt auf den nächsten auszuführenden Befehl.</solutionText>
+                        </variant>
+                    </variants>
+                </subtask>
+                <subtask id="st-03">
+                    <title>Practice Easy</title>
+                    <score>2.0</score>
+                    <difficultyLevel>EASY</difficultyLevel>
+                    <examType>PRACTICE</examType>
+                    <variants>
+                        <variant id="var-03">
+                            <taskText>Nennen Sie eine Aufgabe eines Registers.</taskText>
+                            <answerText></answerText>
+                            <solutionText>Register speichern Daten oder Adressen für die Verarbeitung.</solutionText>
+                        </variant>
+                    </variants>
+                </subtask>
+                <subtask id="st-04">
+                    <title>Practice Medium</title>
+                    <score>2.0</score>
+                    <difficultyLevel>MEDIUM</difficultyLevel>
+                    <examType>PRACTICE</examType>
+                    <variants>
+                        <variant id="var-04">
+                            <taskText>Erklären Sie kurz die Rolle des Program Counters.</taskText>
+                            <answerText></answerText>
+                            <solutionText>Der Program Counter steuert die Reihenfolge der Befehlsausführung.</solutionText>
+                        </variant>
+                    </variants>
+                </subtask>
+                <subtask id="st-05">
+                    <title>Practice Hard</title>
+                    <score>2.0</score>
+                    <difficultyLevel>HARD</difficultyLevel>
+                    <examType>PRACTICE</examType>
+                    <variants>
+                        <variant id="var-05">
+                            <taskText>Warum sind Registerzugriffe schneller als Hauptspeicherzugriffe?</taskText>
+                            <answerText></answerText>
+                            <solutionText>Register liegen direkt in der CPU und benötigen weniger Taktzyklen.</solutionText>
+                        </variant>
+                    </variants>
+                </subtask>
+            </subtasks>
+        </chapter>
+
+        <chapter id="ch-02">
+            <title>Adressierungsarten</title>
+            <examAppearance>INCLUDE</examAppearance>
+            <selectedRegularScore>2.0</selectedRegularScore>
+            <subtasks>
+                <subtask id="st-06">
+                    <title>Regular Easy</title>
+                    <score>1.0</score>
+                    <difficultyLevel>EASY</difficultyLevel>
+                    <examType>REGULAR</examType>
+                    <variants>
+                        <variant id="var-06">
+                            <taskText>Was bedeutet unmittelbare Adressierung?</taskText>
+                            <answerText></answerText>
+                            <solutionText>Der Operand steht direkt im Befehl.</solutionText>
+                        </variant>
+                    </variants>
+                </subtask>
+                <subtask id="st-07">
+                    <title>Regular Medium</title>
+                    <score>1.0</score>
+                    <difficultyLevel>MEDIUM</difficultyLevel>
+                    <examType>REGULAR</examType>
+                    <variants>
+                        <variant id="var-07">
+                            <taskText>Was ist direkte Adressierung?</taskText>
+                            <answerText></answerText>
+                            <solutionText>Die Adresse des Operanden ist im Befehl enthalten.</solutionText>
+                        </variant>
+                    </variants>
+                </subtask>
+                <subtask id="st-08">
+                    <title>Practice Easy</title>
+                    <score>2.0</score>
+                    <difficultyLevel>EASY</difficultyLevel>
+                    <examType>PRACTICE</examType>
+                    <variants>
+                        <variant id="var-08">
+                            <taskText>Was ist eine Speicheradresse?</taskText>
+                            <answerText></answerText>
+                            <solutionText>Sie bezeichnet eine eindeutige Position im Speicher.</solutionText>
+                        </variant>
+                    </variants>
+                </subtask>
+                <subtask id="st-09">
+                    <title>Practice Medium</title>
+                    <score>2.0</score>
+                    <difficultyLevel>MEDIUM</difficultyLevel>
+                    <examType>PRACTICE</examType>
+                    <variants>
+                        <variant id="var-09">
+                            <taskText>Beschreiben Sie direkte Adressierung in einem Satz.</taskText>
+                            <answerText></answerText>
+                            <solutionText>Bei direkter Adressierung verweist der Befehl direkt auf die Speicheradresse.</solutionText>
+                        </variant>
+                    </variants>
+                </subtask>
+                <subtask id="st-10">
+                    <title>Practice Hard</title>
+                    <score>2.0</score>
+                    <difficultyLevel>HARD</difficultyLevel>
+                    <examType>PRACTICE</examType>
+                    <variants>
+                        <variant id="var-10">
+                            <taskText>Warum ist indirekte Adressierung flexibler?</taskText>
+                            <answerText></answerText>
+                            <solutionText>Weil Adressen über Register oder Speicherstellen dynamisch bestimmt werden können.</solutionText>
+                        </variant>
+                    </variants>
+                </subtask>
+            </subtasks>
+        </chapter>
+
+        <chapter id="ch-03">
+            <title>Maschinenbefehle</title>
+            <examAppearance>INCLUDE</examAppearance>
+            <selectedRegularScore>2.0</selectedRegularScore>
+            <subtasks>
+                <subtask id="st-11">
+                    <title>Regular Easy</title>
+                    <score>1.0</score>
+                    <difficultyLevel>EASY</difficultyLevel>
+                    <examType>REGULAR</examType>
+                    <variants>
+                        <variant id="var-11">
+                            <taskText>Was macht MOV allgemein?</taskText>
+                            <answerText></answerText>
+                            <solutionText>MOV kopiert oder überträgt Werte.</solutionText>
+                        </variant>
+                    </variants>
+                </subtask>
+                <subtask id="st-12">
+                    <title>Regular Medium</title>
+                    <score>1.0</score>
+                    <difficultyLevel>MEDIUM</difficultyLevel>
+                    <examType>REGULAR</examType>
+                    <variants>
+                        <variant id="var-12">
+                            <taskText>Worin unterscheiden sich MOV und ADD?</taskText>
+                            <answerText></answerText>
+                            <solutionText>ADD rechnet, MOV überträgt nur Werte.</solutionText>
+                        </variant>
+                    </variants>
+                </subtask>
+                <subtask id="st-13">
+                    <title>Practice Easy</title>
+                    <score>2.0</score>
+                    <difficultyLevel>EASY</difficultyLevel>
+                    <examType>PRACTICE</examType>
+                    <variants>
+                        <variant id="var-13">
+                            <taskText>Was ist ein Maschinenbefehl?</taskText>
+                            <answerText></answerText>
+                            <solutionText>Ein Maschinenbefehl ist eine binäre Anweisung für die CPU.</solutionText>
+                        </variant>
+                    </variants>
+                </subtask>
+                <subtask id="st-14">
+                    <title>Practice Medium</title>
+                    <score>2.0</score>
+                    <difficultyLevel>MEDIUM</difficultyLevel>
+                    <examType>PRACTICE</examType>
+                    <variants>
+                        <variant id="var-14">
+                            <taskText>Wozu dient ein Vergleichsbefehl?</taskText>
+                            <answerText></answerText>
+                            <solutionText>Er vergleicht Werte und setzt Statusflags.</solutionText>
+                        </variant>
+                    </variants>
+                </subtask>
+                <subtask id="st-15">
+                    <title>Practice Hard</title>
+                    <score>2.0</score>
+                    <difficultyLevel>HARD</difficultyLevel>
+                    <examType>PRACTICE</examType>
+                    <variants>
+                        <variant id="var-15">
+                            <taskText>Warum sind Sprungbefehle für Kontrollstrukturen wichtig?</taskText>
+                            <answerText></answerText>
+                            <solutionText>Sie ermöglichen Verzweigungen und Schleifen im Programmablauf.</solutionText>
+                        </variant>
+                    </variants>
+                </subtask>
+            </subtasks>
+        </chapter>
+
+        <chapter id="ch-04">
+            <title>Speicher und Stack</title>
+            <examAppearance>INCLUDE</examAppearance>
+            <selectedRegularScore>2.0</selectedRegularScore>
+            <subtasks>
+                <subtask id="st-16">
+                    <title>Regular Easy</title>
+                    <score>1.0</score>
+                    <difficultyLevel>EASY</difficultyLevel>
+                    <examType>REGULAR</examType>
+                    <variants>
+                        <variant id="var-16">
+                            <taskText>Was ist ein Stack?</taskText>
+                            <answerText></answerText>
+                            <solutionText>Ein Stack ist ein Speicherbereich nach dem LIFO-Prinzip.</solutionText>
+                        </variant>
+                    </variants>
+                </subtask>
+                <subtask id="st-17">
+                    <title>Regular Medium</title>
+                    <score>1.0</score>
+                    <difficultyLevel>MEDIUM</difficultyLevel>
+                    <examType>REGULAR</examType>
+                    <variants>
+                        <variant id="var-17">
+                            <taskText>Was machen PUSH und POP?</taskText>
+                            <answerText></answerText>
+                            <solutionText>PUSH legt Daten auf den Stack, POP holt sie herunter.</solutionText>
+                        </variant>
+                    </variants>
+                </subtask>
+                <subtask id="st-18">
+                    <title>Practice Easy</title>
+                    <score>2.0</score>
+                    <difficultyLevel>EASY</difficultyLevel>
+                    <examType>PRACTICE</examType>
+                    <variants>
+                        <variant id="var-18">
+                            <taskText>Was bedeutet LIFO?</taskText>
+                            <answerText></answerText>
+                            <solutionText>Last In, First Out.</solutionText>
+                        </variant>
+                    </variants>
+                </subtask>
+                <subtask id="st-19">
+                    <title>Practice Medium</title>
+                    <score>2.0</score>
+                    <difficultyLevel>MEDIUM</difficultyLevel>
+                    <examType>PRACTICE</examType>
+                    <variants>
+                        <variant id="var-19">
+                            <taskText>Welche Aufgabe hat der Stack Pointer?</taskText>
+                            <answerText></answerText>
+                            <solutionText>Er zeigt auf die aktuelle Position im Stack.</solutionText>
+                        </variant>
+                    </variants>
+                </subtask>
+                <subtask id="st-20">
+                    <title>Practice Hard</title>
+                    <score>2.0</score>
+                    <difficultyLevel>HARD</difficultyLevel>
+                    <examType>PRACTICE</examType>
+                    <variants>
+                        <variant id="var-20">
+                            <taskText>Warum kann falsche Stack-Nutzung zu Fehlern führen?</taskText>
+                            <answerText></answerText>
+                            <solutionText>Weil Rücksprungadressen oder Daten überschrieben werden können.</solutionText>
+                        </variant>
+                    </variants>
+                </subtask>
+            </subtasks>
+        </chapter>
+    </chapters>
+</exam>
