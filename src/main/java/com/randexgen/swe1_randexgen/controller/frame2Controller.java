@@ -6,6 +6,7 @@ import com.randexgen.swe1_randexgen.service.DataValidator;
 import com.randexgen.swe1_randexgen.service.ScoreCalculator;
 import com.randexgen.swe1_randexgen.service.XMLParser;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -1400,33 +1401,29 @@ public class frame2Controller {
      * The current exam and file references are stored in the application state
      * so that the PDF view can access the same data.
      */
-    @FXML
-    private void switchToPDF() {
-            try {
+@FXML
+private void switchToPDF() {
+    try {
+        AppState.setCurrentExam(currentExam);
+        AppState.setCurrentXmlFile(currentXmlFile);
 
-            AppState.setCurrentExam(currentExam);
-            AppState.setCurrentXmlFile(currentXmlFile);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/randexgen/swe1_randexgen/pdfviewer.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
 
-            // Load the second FXML view and create its scene
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/randexgen/swe1_randexgen/pdfviewer.fxml"));
-            Scene scene = new Scene(loader.load());
+        Stage stage = (Stage) pdfPane.getScene().getWindow();
+        boolean wasMaximized = stage.isMaximized();
 
-            PdfviewerController controller = loader.getController();
+        stage.setResizable(true);
+        stage.setScene(scene);
+        stage.show();
 
-            // Replace the current scene with the second application view
-            Stage stage = (Stage) pdfPane.getScene().getWindow();
-            stage.setResizable(true);
-            stage.setScene(scene);
-            stage.show();
-
-            // Refresh the maximized state and load the XML file afterwards
-            javafx.application.Platform.runLater(() -> {
-                stage.setMaximized(false);
-                stage.setMaximized(true);
-            });
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (wasMaximized) {
+            javafx.application.Platform.runLater(() -> stage.setMaximized(true));
         }
+
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+}
 }
