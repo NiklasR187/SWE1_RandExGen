@@ -70,6 +70,12 @@ public class frame2Controller {
     private VBox chapterOverviewBox;
 
     @FXML
+    private Button expandAllButton;
+
+    @FXML
+    private Button collapseAllButton;
+
+    @FXML
     private VBox editorContentBox;
 
     private Exam currentExam;
@@ -97,6 +103,9 @@ public class frame2Controller {
         if (bottomActionBox != null) {
             bottomActionBox.getChildren().clear();
         }
+
+        updateExpandCollapseButtons(true);
+
             Platform.runLater(() -> {
                 Stage stage = (Stage) closeButton.getScene().getWindow();
 
@@ -351,13 +360,12 @@ public class frame2Controller {
         HBox examRow = new HBox();
         examRow.setAlignment(Pos.CENTER_LEFT);
         examRow.setSpacing(8);
-        examRow.setPadding(new Insets(8, 10, 8, 10));
+        examRow.setPadding(new Insets(8, 10, 8, 28));
         examRow.getStyleClass().add("nav-exam");
 
         Label examLabel = new Label(exam.getTitle());
-        examLabel.setStyle("-fx-font-size: 15; -fx-font-weight: bold;");
+        examLabel.getStyleClass().add("exam-label");
         examLabel.setWrapText(true);
-        examLabel.setCursor(Cursor.HAND);
 
         HBox.setHgrow(examLabel, Priority.ALWAYS);
 
@@ -385,9 +393,8 @@ public class frame2Controller {
             arrowLabel.setCursor(Cursor.HAND);
 
             Label chapterLabel = new Label(chapter.getTitle());
-            chapterLabel.setStyle("-fx-font-size: 14; -fx-font-weight: bold;");
+            chapterLabel.getStyleClass().add("chapter-label");
             chapterLabel.setWrapText(true);
-            chapterLabel.setCursor(Cursor.HAND);
 
             HBox.setHgrow(chapterLabel, Priority.ALWAYS);
 
@@ -414,8 +421,8 @@ public class frame2Controller {
                     subtaskRow.getStyleClass().add("nav-subtask");
 
                     Label subtaskLabel = new Label(subtask.getTitle());
+                    subtaskLabel.getStyleClass().add("subtask-label");
                     subtaskLabel.setWrapText(true);
-                    subtaskLabel.setCursor(Cursor.HAND);
 
                     HBox.setHgrow(subtaskLabel, Priority.ALWAYS);
 
@@ -432,41 +439,65 @@ public class frame2Controller {
     /**
      * Expands all chapters in the left overview.
      *
-     * <p>This method iterates over all chapters of the current exam and sets their
-     * expanded state to {@code true} in the {@code chapterExpandedState} map.
-     * Afterwards, the left overview UI is rebuilt to reflect the updated state.</p>
-     *
-     * <p>Used when the user clicks the "Expand All" button.</p>
+     * This method sets the expanded state of all chapters to true,
+     * rebuilds the UI, and updates the button styles so that
+     * "Expand all" appears as the active (disabled) button.
      */
     @FXML
     private void handleExpandAll() {
+
         // Set all chapters to expanded (true)
         for (Chapter chapter : currentExam.getChapters()) {
             chapterExpandedState.put(chapter.getId(), true);
         }
 
-        // Rebuild the UI to apply the new states
+        // Rebuild the UI to reflect the updated expand state
         buildLeftOverview(currentExam);
+
+        // Update button styles (Expand = active)
+        updateExpandCollapseButtons(true);
     }
 
     /**
      * Collapses all chapters in the left overview.
      *
-     * <p>This method iterates over all chapters of the current exam and sets their
-     * expanded state to {@code false} in the {@code chapterExpandedState} map.
-     * Afterwards, the left overview UI is rebuilt to reflect the updated state.</p>
-     *
-     * <p>Used when the user clicks the "Collapse All" button.</p>
+     * This method sets the expanded state of all chapters to false,
+     * rebuilds the UI, and updates the button styles so that
+     * "Collapse all" appears as the active (disabled) button.
      */
     @FXML
     private void handleCollapseAll() {
+
         // Set all chapters to collapsed (false)
         for (Chapter chapter : currentExam.getChapters()) {
             chapterExpandedState.put(chapter.getId(), false);
         }
 
-        // Rebuild the UI to apply the new states
+        // Rebuild the UI to reflect the updated collapse state
         buildLeftOverview(currentExam);
+
+        // Update button styles (Collapse = active)
+        updateExpandCollapseButtons(false);
+    }
+
+    /**
+     * Updates the visual state and interactivity of the expand/collapse buttons.
+     *
+     * Depending on the current state:
+     * - The active button is disabled and styled via CSS
+     * - The inactive button remains enabled and keeps its hover effects
+     *
+     * @param expanded true if all chapters are expanded, false if all are collapsed
+     */
+    private void updateExpandCollapseButtons(boolean expanded) {
+
+        if (expanded) {
+            expandAllButton.setDisable(true);
+            collapseAllButton.setDisable(false);
+        } else {
+            collapseAllButton.setDisable(true);
+            expandAllButton.setDisable(false);
+        }
     }
 
     /**
@@ -585,6 +616,19 @@ public class frame2Controller {
         editButton.setFitHeight(25);
         editButton.setPreserveRatio(true);
         editButton.setCursor(Cursor.HAND);
+        editButton.setPickOnBounds(true);
+
+        editButton.setOnMouseEntered(e -> {
+            editButton.setOpacity(0.6);
+            editButton.setScaleX(1.1);
+            editButton.setScaleY(1.1);
+        });
+
+        editButton.setOnMouseExited(e -> {
+            editButton.setOpacity(1.0);
+            editButton.setScaleX(1.0);
+            editButton.setScaleY(1.0);
+        });
 
         row.getChildren().addAll(
                 titleLabel,
@@ -639,7 +683,7 @@ public class frame2Controller {
 
         Label subtaskWarningLabel = new Label();
         this.subtaskWarningLabel = subtaskWarningLabel;
-        subtaskWarningLabel.setStyle("-fx-font-weight: bold;");
+        subtaskWarningLabel.setStyle("-fx-text-fill: #cc8400; -fx-font-weight: bold;");
         subtaskWarningLabel.setPrefWidth(215);
         subtaskWarningLabel.setText(DataValidator.isSubtaskUsable(subtask) ? "" : "⚠ Invalid");
 
@@ -745,12 +789,38 @@ public class frame2Controller {
         editButton.setFitHeight(25);
         editButton.setPreserveRatio(true);
         editButton.setCursor(Cursor.HAND);
+        editButton.setPickOnBounds(true);
 
         ImageView deleteButton = new ImageView(new Image(getClass().getResourceAsStream("/images/Trash.png")));
         deleteButton.setFitWidth(40);
         deleteButton.setFitHeight(40);
         deleteButton.setPreserveRatio(true);
         deleteButton.setCursor(Cursor.HAND);
+        deleteButton.setPickOnBounds(true);
+
+        editButton.setOnMouseEntered(e -> {
+            editButton.setOpacity(0.6);
+            editButton.setScaleX(1.1);
+            editButton.setScaleY(1.1);
+        });
+
+        editButton.setOnMouseExited(e -> {
+            editButton.setOpacity(1.0);
+            editButton.setScaleX(1.0);
+            editButton.setScaleY(1.0);
+        });
+
+        deleteButton.setOnMouseEntered(e -> {
+            deleteButton.setOpacity(0.6);
+            deleteButton.setScaleX(1.1);
+            deleteButton.setScaleY(1.1);
+        });
+
+        deleteButton.setOnMouseExited(e -> {
+            deleteButton.setOpacity(1.0);
+            deleteButton.setScaleX(1.0);
+            deleteButton.setScaleY(1.0);
+        });
 
         row.getChildren().addAll(
                 titleLabel,
@@ -903,44 +973,36 @@ public class frame2Controller {
         box.setFillWidth(true);
         box.getStyleClass().add("variant-box");
 
-        Label variantTitle = new Label("Variant " + variant.getId());
-        variantTitle.setStyle("-fx-font-weight: bold; -fx-font-size: 14;");
+        Label titleLabel = new Label("Variant");
+        titleLabel.getStyleClass().add("variant-title");
+
+        Label badge = new Label(variant.getId());
+        badge.getStyleClass().add("variant-badge");
+
+        HBox titleBox = new HBox(titleLabel, badge);
+        titleBox.setSpacing(8);
+        titleBox.setAlignment(Pos.CENTER_LEFT);
 
         Label taskLabel = new Label("Question:");
         TextArea taskField = new TextArea(variant.getTaskText());
         taskField.setWrapText(true);
         taskField.setPrefRowCount(3);
         taskField.setMaxWidth(Double.MAX_VALUE);
-        taskField.setStyle(
-                "-fx-background-radius: 8;" +
-                        "-fx-border-radius: 8;" +
-                        "-fx-border-color: #BDBDBD;" +
-                        "-fx-background-color: white;"
-        );
+        taskField.getStyleClass().add("modern-textarea");
 
         Label answerLabel = new Label("Answer:");
         TextArea answerField = new TextArea(variant.getAnswerText());
         answerField.setWrapText(true);
         answerField.setPrefRowCount(3);
         answerField.setMaxWidth(Double.MAX_VALUE);
-        answerField.setStyle(
-                "-fx-background-radius: 8;" +
-                        "-fx-border-radius: 8;" +
-                        "-fx-border-color: #BDBDBD;" +
-                        "-fx-background-color: white;"
-        );
+        answerField.getStyleClass().add("modern-textarea");
 
         Label solutionLabel = new Label("Solution:");
         TextArea solutionField = new TextArea(variant.getSolutionText());
         solutionField.setWrapText(true);
         solutionField.setPrefRowCount(3);
         solutionField.setMaxWidth(Double.MAX_VALUE);
-        solutionField.setStyle(
-                "-fx-background-radius: 8;" +
-                        "-fx-border-radius: 8;" +
-                        "-fx-border-color: #BDBDBD;" +
-                        "-fx-background-color: white;"
-        );
+        solutionField.getStyleClass().add("modern-textarea");
 
         // Create the delete icon for removing the current variant
         ImageView deleteButton = new ImageView(
@@ -950,19 +1012,25 @@ public class frame2Controller {
         deleteButton.setFitHeight(40);
         deleteButton.setPreserveRatio(true);
         deleteButton.setCursor(Cursor.HAND);
+        deleteButton.setPickOnBounds(true);
 
-        deleteButton.setOnMouseEntered(e -> deleteButton.setOpacity(0.7));
-        deleteButton.setOnMouseExited(e -> deleteButton.setOpacity(1.0));
+        deleteButton.setOnMouseEntered(e -> {
+            deleteButton.setOpacity(0.6);
+            deleteButton.setScaleX(1.1);
+            deleteButton.setScaleY(1.1);
+        });
 
-        deleteButton.setOnMouseClicked(e -> {
-            e.consume();
-            deleteVariant(variant, parentSubtask, parentChapter);
+        deleteButton.setOnMouseExited(e -> {
+            deleteButton.setOpacity(1.0);
+            deleteButton.setScaleX(1.0);
+            deleteButton.setScaleY(1.0);
         });
 
         HBox topBar = new HBox();
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
-        topBar.getChildren().addAll(variantTitle, spacer, deleteButton);
+
+        topBar.getChildren().addAll(titleBox, spacer, deleteButton);
 
         // Keep the variant model synchronized with the text fields
         taskField.setOnKeyReleased(e -> {
@@ -1113,7 +1181,7 @@ public class frame2Controller {
      */
     private HBox createChapterRow(Chapter chapter) {
         Label warningLabel = new Label();
-        warningLabel.setStyle("-fx-font-weight: bold;");
+        warningLabel.setStyle("-fx-text-fill: #cc8400; -fx-font-weight: bold;");
         warningLabel.setPrefWidth(215);
         warningLabel.setText(DataValidator.getWarningText(chapter));
         chapterWarningLabels.put(chapter, warningLabel);
@@ -1204,12 +1272,38 @@ public class frame2Controller {
         editButton.setFitHeight(25);
         editButton.setPreserveRatio(true);
         editButton.setCursor(Cursor.HAND);
+        editButton.setPickOnBounds(true);
 
         ImageView deleteButton = new ImageView(new Image(getClass().getResourceAsStream("/images/Trash.png")));
         deleteButton.setFitWidth(40);
         deleteButton.setFitHeight(40);
         deleteButton.setPreserveRatio(true);
         deleteButton.setCursor(Cursor.HAND);
+        deleteButton.setPickOnBounds(true);
+
+        editButton.setOnMouseEntered(e -> {
+            editButton.setOpacity(0.6);
+            editButton.setScaleX(1.1);
+            editButton.setScaleY(1.1);
+        });
+
+        editButton.setOnMouseExited(e -> {
+            editButton.setOpacity(1.0);
+            editButton.setScaleX(1.0);
+            editButton.setScaleY(1.0);
+        });
+
+        deleteButton.setOnMouseEntered(e -> {
+            deleteButton.setOpacity(0.6);
+            deleteButton.setScaleX(1.1);
+            deleteButton.setScaleY(1.1);
+        });
+
+        deleteButton.setOnMouseExited(e -> {
+            deleteButton.setOpacity(1.0);
+            deleteButton.setScaleX(1.0);
+            deleteButton.setScaleY(1.0);
+        });
 
         chapterRow.getChildren().addAll(
                 titleLabel,

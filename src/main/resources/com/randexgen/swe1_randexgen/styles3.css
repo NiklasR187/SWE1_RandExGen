@@ -1,0 +1,15 @@
+.start-button {
+    -fx-background-color: #28282B;
+    -fx-text-fill: white;
+    -fx-background-radius: 12;
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-padding: 10 18 10 18;
+}
+
+.start-button:hover {
+    -fx-background-color: #4a4a52;
+    -fx-scale-x: 1.04;
+    -fx-scale-y: 1.04;
+}

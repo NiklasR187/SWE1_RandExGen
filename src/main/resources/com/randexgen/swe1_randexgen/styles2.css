@@ -19,62 +19,75 @@
     -fx-fill: #d1d1d1;
     -fx-font-size: 12px;
 }
+
 .combo-box {
-   -fx-background-color: white;
-   -fx-background-radius: 10;
-   -fx-border-radius: 10;
-   -fx-border-color: #d0d0d0;
-   -fx-border-width: 1;
-   -fx-font-size: 13px;
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: #d0d0d0;
+    -fx-border-width: 1;
+    -fx-font-size: 13px;
+    -fx-cursor: hand;
 }
+
+/* Fokus (KEIN BLAU MEHR) */
 .combo-box:focused {
     -fx-border-color: #a8a8a8;
     -fx-background-color: white;
-}.combo-box-popup .list-view {
-     -fx-background-insets: 0;
- }.combo-box-popup .list-view {
-      -fx-background-color: white;
-      -fx-background-radius: 10;
-      -fx-border-radius: 10;
-      -fx-border-color: #d0d0d0;
-      -fx-background-insets: 0;
-      -fx-padding: 2;
-  }
+}
 
-/* Innerer Bereich /
+/* Arrow Button rechts */
+.combo-box .arrow-button {
+    -fx-background-color: transparent;
+}
+
+/* Pfeil selbst */
+.combo-box .arrow {
+    -fx-background-color: #666666;
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: #d0d0d0;
+    -fx-padding: 2;
+}
+
 .combo-box-popup .list-view .virtual-flow {
     -fx-background-color: transparent;
-    -fx-background-radius: 10;
-}.combo-box-popup .list-cell {
+}
+
+.combo-box-popup .list-cell {
     -fx-background-color: white;
     -fx-text-fill: black;
-    -fx-background-radius: 0;
     -fx-padding: 8 12 8 12;
 }
 
-/ Erste Zelle oben abrunden /
-.combo-box-popup .list-cell:first {
-    -fx-background-radius: 10 10 0 0;
-}
-
-/ Letzte Zelle unten abrunden /
-.combo-box-popup .list-cell:last {
-    -fx-background-radius: 0 0 10 10;
-}
-
-/ Wenn es nur einen Eintrag gibt /
-.combo-box-popup .list-cell:only-one {
-    -fx-background-radius: 10;
-}
-
-/ Hover /
 .combo-box-popup .list-cell:hover {
     -fx-background-color: #e6e6e6;
 }
 
-/ Selected */
 .combo-box-popup .list-cell:selected {
     -fx-background-color: #dcdcdc;
+    -fx-text-fill: black;
+}
+
+
+.combo-box-popup .list-view:focused .list-cell:selected {
+    -fx-background-color: #dcdcdc;
+}
+
+.combo-box:focused,
+.combo-box-base:focused {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+
+.list-view:focused {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
 }
 
 .top-primary-button {
@@ -178,14 +191,16 @@
     -fx-border-radius: 14;
     -fx-font-size: 15px;
     -fx-font-weight: bold;
-    -fx-cursor: hand;
-    -fx-graphic-text-gap: 10;
+
+    -fx-padding: 0 20 0 20;
+    -fx-graphic-text-gap: 12;
     -fx-alignment: CENTER_LEFT;
-    -fx-padding: 0 16 0 16;
 }
 
 .main-dark-button:hover {
     -fx-background-color: #3a3a3a;
+    -fx-scale-x: 1.04;
+    -fx-scale-y: 1.04;
 }
 
 .main-dark-button:pressed {

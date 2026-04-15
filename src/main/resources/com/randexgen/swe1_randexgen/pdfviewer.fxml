@@ -27,7 +27,7 @@
                 <Pane prefHeight="26.0" prefWidth="200.0" style="-fx-background-color: #828282;">
                     <children>
 
-                        <Pane onMouseClicked="#switchToXML" fx:id="xmlPane" prefHeight="26.0" prefWidth="94.0" style="-fx-background-color: #a3a69c; -fx-cursor: hand;">
+                        <Pane onMouseClicked="#switchToXML" fx:id="xmlPane" prefHeight="26.0" prefWidth="94.0" style="-fx-background-color: #a3a69c; -fx-cursor: hand; -fx-background-radius: 8 8 0 0;">
                             <children>
                                 <Text layoutX="36.0" layoutY="18.0" text="XML">
                                     <font>
@@ -41,7 +41,7 @@
                               layoutX="100.0"
                               prefHeight="26.0"
                               prefWidth="94.0"
-                              style="-fx-background-color: #ddded4;">
+                              style="-fx-background-color: #ddded4; -fx-background-radius: 8 8 0 0;">
                             <children>
                                 <Text layoutX="36.0" layoutY="18.0" text="PDF">
                                     <font>
@@ -117,13 +117,15 @@
                                 styleClass="main-dark-button">
 
                             <graphic>
-                                <ImageView fitWidth="22.0"
-                                           fitHeight="22.0"
-                                           preserveRatio="true">
-                                    <image>
-                                        <Image url="@../../../images/refresh.png"/>
-                                    </image>
-                                </ImageView>
+                                <StackPane prefWidth="40" alignment="CENTER">
+                                    <children>
+                                        <ImageView fitWidth="26" fitHeight="26" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../../../images/refresh.png"/>
+                                            </image>
+                                        </ImageView>
+                                    </children>
+                                </StackPane>
                             </graphic>
                         </Button>
 
@@ -135,13 +137,15 @@
                                 styleClass="main-dark-button">
 
                             <graphic>
-                                <ImageView fitWidth="28.0"
-                                           fitHeight="28.0"
-                                           preserveRatio="true">
-                                    <image>
-                                        <Image url="@../../../images/image1.png"/>
-                                    </image>
-                                </ImageView>
+                                <StackPane prefWidth="40" alignment="CENTER">
+                                    <children>
+                                        <ImageView fitWidth="40" fitHeight="40" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../../../images/image1.png"/>
+                                            </image>
+                                        </ImageView>
+                                    </children>
+                                </StackPane>
                             </graphic>
                         </Button>
                     </children>
