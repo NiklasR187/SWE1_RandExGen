@@ -855,10 +855,20 @@ public class frame2Controller {
             }
         });
 
-        // Delete the selected subtask from its parent chapter
+// Delete the selected subtask from its parent chapter
         deleteButton.setOnMouseClicked(e -> {
             e.consume();
-            deleteSubtask(subtask, parentChapter);
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirm Deletion");
+            alert.setHeaderText("Delete Subtask?");
+            alert.setContentText("Are you sure you want to delete this subtask? This action cannot be undone.");
+
+            Optional<ButtonType> result = alert.showAndWait();
+
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                deleteSubtask(subtask, parentChapter);
+            }
         });
 
         Region outerSpacer = new Region();
@@ -1024,6 +1034,22 @@ public class frame2Controller {
             deleteButton.setOpacity(1.0);
             deleteButton.setScaleX(1.0);
             deleteButton.setScaleY(1.0);
+        });
+
+        // Delete the selected subtask from its parent chapter
+        deleteButton.setOnMouseClicked(e -> {
+            e.consume();
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirm Deletion");
+            alert.setHeaderText("Delete Variant?");
+            alert.setContentText("Are you sure you want to delete this variant? This action cannot be undone.");
+
+            Optional<ButtonType> result = alert.showAndWait();
+
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                deleteVariant(variant, parentSubtask, parentChapter);
+            }
         });
 
         HBox topBar = new HBox();
@@ -1339,9 +1365,20 @@ public class frame2Controller {
         });
 
         // Delete the selected chapter from the exam
+// Delete the selected subtask from its parent chapter
         deleteButton.setOnMouseClicked(e -> {
             e.consume();
-            deleteChapter(chapter);
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirm Deletion");
+            alert.setHeaderText("Delete Chapter?");
+            alert.setContentText("Are you sure you want to delete this chapter? This action cannot be undone.");
+
+            Optional<ButtonType> result = alert.showAndWait();
+
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                deleteChapter(chapter);
+            }
         });
 
         Region outerSpacer = new Region();
