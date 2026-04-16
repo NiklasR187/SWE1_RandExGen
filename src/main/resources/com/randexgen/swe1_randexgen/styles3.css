@@ -1,15 +1,184 @@
+.hello-root {
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-background-color: linear-gradient(to bottom right, #f3f4f7, #e9ebf0);
+}
+
+/* =========================================================
+   DARK MODE ROOT
+   ========================================================= */
+
+.hello-root.dark-mode {
+    -fx-background-color: linear-gradient(to bottom right, #1f232b, #252b36);
+}
+
+/* =========================================================
+   TITLE AREA
+   ========================================================= */
+
+.hello-title {
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1f1f1f;
+}
+
+.hello-subtitle {
+    -fx-font-size: 14px;
+    -fx-text-fill: #666666;
+}
+
+.hello-description {
+    -fx-font-size: 13px;
+    -fx-text-fill: #6f6f6f;
+}
+
+.hello-or-label {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #7a7a7a;
+}
+
+.hello-status-label {
+    -fx-font-size: 13px;
+    -fx-text-fill: #666666;
+}
+
+/* Dark mode text */
+.hello-root.dark-mode .hello-title {
+    -fx-text-fill: #ffffff;
+}
+
+.hello-root.dark-mode .hello-subtitle {
+    -fx-text-fill: #cbd3df;
+}
+
+.hello-root.dark-mode .hello-description {
+    -fx-text-fill: #b7c0cd;
+}
+
+.hello-root.dark-mode .hello-or-label {
+    -fx-text-fill: #98a3b3;
+}
+
+.hello-root.dark-mode .hello-status-label {
+    -fx-text-fill: #9aa6b8;
+}
+
+/* =========================================================
+   MAIN CARD
+   ========================================================= */
+
+.hello-card {
+    -fx-background-color: rgba(255, 255, 255, 0.96);
+    -fx-background-radius: 24;
+    -fx-border-color: #dddddd;
+    -fx-border-width: 1;
+    -fx-border-radius: 24;
+    -fx-padding: 34 36 34 36;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 22, 0.18, 0, 5);
+}
+
+.hello-root.dark-mode .hello-card {
+    -fx-background-color: #2a303b;
+    -fx-background-radius: 24;
+    -fx-border-color: #4f7cff;
+    -fx-border-width: 1.2;
+    -fx-border-radius: 24;
+    -fx-padding: 34 36 34 36;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.42), 28, 0.24, 0, 8);
+}
+
+/* =========================================================
+   DIVIDER
+   ========================================================= */
+
+.hello-divider {
+    -fx-background-color: #dddddd;
+}
+
+.hello-root.dark-mode .hello-divider {
+    -fx-background-color: #434c5b;
+}
+
+/* =========================================================
+   START BUTTONS
+   ========================================================= */
+
 .start-button {
     -fx-background-color: #28282B;
     -fx-text-fill: white;
     -fx-background-radius: 12;
-    -fx-font-size: 14;
+    -fx-border-radius: 12;
+    -fx-font-size: 14px;
     -fx-font-weight: bold;
     -fx-cursor: hand;
     -fx-padding: 10 18 10 18;
+    -fx-graphic-text-gap: 10;
+    -fx-alignment: CENTER;
+}
+
+.start-button > .text {
+    -fx-fill: white;
 }
 
 .start-button:hover {
     -fx-background-color: #4a4a52;
     -fx-scale-x: 1.04;
     -fx-scale-y: 1.04;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.18), 20, 0.25, 0, 4);
+}
+
+.start-button:hover > .text {
+    -fx-fill: white;
+}
+
+.start-button:pressed {
+    -fx-background-color: #202024;
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+}
+
+.start-button:pressed > .text {
+    -fx-fill: white;
+}
+
+.start-button:disabled {
+    -fx-opacity: 0.6;
+    -fx-scale-x: 1.0;
+    -fx-scale-y: 1.0;
+}
+
+.start-button:disabled > .text {
+    -fx-fill: white;
+}
+
+/* Dark mode buttons */
+.hello-root.dark-mode .start-button {
+    -fx-background-color: #39414d;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #4f7cff;
+    -fx-border-width: 1;
+    -fx-border-radius: 12;
+}
+
+.hello-root.dark-mode .start-button > .text {
+    -fx-fill: white;
+}
+
+.hello-root.dark-mode .start-button:hover {
+    -fx-background-color: #46505e;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-effect: dropshadow(gaussian, rgba(79,124,255,0.35), 18, 0.30, 0, 4);
+}
+
+.hello-root.dark-mode .start-button:hover > .text {
+    -fx-fill: white;
+}
+
+.hello-root.dark-mode .start-button:pressed {
+    -fx-background-color: #313842;
+}
+
+.hello-root.dark-mode .start-button:pressed > .text {
+    -fx-fill: white;
 }

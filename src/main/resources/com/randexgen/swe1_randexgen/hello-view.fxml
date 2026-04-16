@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.geometry.Pos?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -9,69 +8,16 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<BorderPane style="-fx-background-color: #efefef;"
+<BorderPane styleClass="hello-root"
             xmlns="http://javafx.com/javafx/25"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.randexgen.swe1_randexgen.controller.helloViewController"
             stylesheets="@styles3.css">
 
-    <!-- ===== TOP: Header mit XML / PDF Tabs ===== -->
-    <top>
-        <Pane prefHeight="26.0"
-              style="-fx-background-color: #828282;">
-            <children>
-                <Pane prefHeight="26.0"
-                      prefWidth="200.0"
-                      style="-fx-background-color: #828282;">
-                    <children>
-
-                        <!-- XML Tab aktiv -->
-                        <Pane prefHeight="26.0"
-                              prefWidth="94.0"
-                              style="-fx-background-color: #ddded4; -fx-background-radius: 8 8 0 0;">
-                            <children>
-                                <Text layoutX="36.0"
-                                      layoutY="18.0"
-                                      text="XML">
-                                    <font>
-                                        <Font name="System Bold" size="14.0" />
-                                    </font>
-                                </Text>
-                            </children>
-                        </Pane>
-
-                        <!-- PDF Tab -->
-                        <Pane fx:id="pdfPane"
-                              layoutX="100.0"
-                              prefHeight="26.0"
-                              prefWidth="94.0"
-                              onMouseClicked="#handlePdfClick"
-                              style="-fx-background-color: #a3a69c; -fx-cursor: hand; -fx-background-radius: 8 8 0 0;">
-                            <children>
-                                <Text layoutX="36.0"
-                                      layoutY="18.0"
-                                      text="PDF">
-                                    <font>
-                                        <Font name="System Bold" size="14.0" />
-                                    </font>
-                                </Text>
-                            </children>
-                        </Pane>
-
-                    </children>
-                </Pane>
-            </children>
-        </Pane>
-    </top>
-
-    <!-- ===== CENTER: Moderner Startscreen ===== -->
     <center>
         <StackPane>
             <children>
@@ -79,35 +25,30 @@
                 <VBox alignment="CENTER"
                       spacing="28.0">
                     <padding>
-                        <Insets top="50.0" right="30.0" bottom="50.0" left="30.0" />
+                        <Insets top="50.0" right="30.0" bottom="50.0" left="30.0"/>
                     </padding>
 
-                    <!-- Titelbereich -->
+                    <!-- Title area -->
                     <VBox alignment="CENTER"
                           spacing="8.0">
                         <children>
                             <Label text="Welcome to RandExGen"
-                                   style="-fx-font-size: 30; -fx-font-weight: bold; -fx-text-fill: #1f1f1f;" />
+                                   styleClass="hello-title"/>
 
                             <Label text="Create or load an XML file to get started."
                                    wrapText="true"
                                    maxWidth="560.0"
                                    alignment="CENTER"
-                                   style="-fx-font-size: 14; -fx-text-fill: #666666;" />
+                                   styleClass="hello-subtitle"/>
                         </children>
                     </VBox>
 
-                    <!-- Zentrale Card -->
+                    <!-- Center card -->
                     <VBox alignment="CENTER"
                           spacing="26.0"
                           maxWidth="620.0"
                           prefWidth="620.0"
-                          style="-fx-background-color: white;
-                                 -fx-background-radius: 24;
-                                 -fx-border-color: #dddddd;
-                                 -fx-border-radius: 24;
-                                 -fx-padding: 34 36 34 36;
-                                 -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 18, 0.15, 0, 3);">
+                          styleClass="hello-card">
 
                         <!-- Create -->
                         <VBox alignment="CENTER"
@@ -120,7 +61,7 @@
                                         styleClass="start-button"
                                         text="Create XML File">
                                     <cursor>
-                                        <Cursor fx:constant="HAND" />
+                                        <Cursor fx:constant="HAND"/>
                                     </cursor>
                                     <graphic>
                                         <ImageView fitHeight="36.0"
@@ -128,7 +69,7 @@
                                                    pickOnBounds="true"
                                                    preserveRatio="true">
                                             <image>
-                                                <Image url="@../../../images/image1.png" />
+                                                <Image url="@../../../images/image1.png"/>
                                             </image>
                                         </ImageView>
                                     </graphic>
@@ -138,26 +79,28 @@
                                        wrapText="true"
                                        maxWidth="420.0"
                                        alignment="CENTER"
-                                       style="-fx-font-size: 13; -fx-text-fill: #6f6f6f;" />
+                                       styleClass="hello-description"/>
                             </children>
                         </VBox>
 
-                        <!-- Trennung -->
+                        <!-- Divider -->
                         <HBox alignment="CENTER"
                               spacing="12.0">
                             <children>
                                 <Region prefWidth="120.0"
-                                        style="-fx-background-color: #e2e2e2;"
                                         minHeight="1.0"
                                         prefHeight="1.0"
-                                        maxHeight="1.0" />
+                                        maxHeight="1.0"
+                                        styleClass="hello-divider"/>
+
                                 <Label text="or"
-                                       style="-fx-font-size: 15; -fx-text-fill: #7a7a7a; -fx-font-weight: bold;" />
+                                       styleClass="hello-or-label"/>
+
                                 <Region prefWidth="120.0"
-                                        style="-fx-background-color: #e2e2e2;"
                                         minHeight="1.0"
                                         prefHeight="1.0"
-                                        maxHeight="1.0" />
+                                        maxHeight="1.0"
+                                        styleClass="hello-divider"/>
                             </children>
                         </HBox>
 
@@ -172,7 +115,7 @@
                                         styleClass="start-button"
                                         text="Load XML File">
                                     <cursor>
-                                        <Cursor fx:constant="HAND" />
+                                        <Cursor fx:constant="HAND"/>
                                     </cursor>
                                     <graphic>
                                         <ImageView fitHeight="36.0"
@@ -180,20 +123,20 @@
                                                    pickOnBounds="true"
                                                    preserveRatio="true">
                                             <image>
-                                                <Image url="@../../../images/image2.png" />
+                                                <Image url="@../../../images/image2.png"/>
                                             </image>
                                         </ImageView>
                                     </graphic>
                                 </Button>
 
                                 <Label text="Load an existing XML file to continue working on your exam."
-                                       style="-fx-font-size: 13; -fx-text-fill: #666666;" />
+                                       styleClass="hello-description"/>
                             </children>
                         </VBox>
                     </VBox>
 
                     <Label fx:id="welcomeText"
-                           style="-fx-text-fill: #666666; -fx-font-size: 13;" />
+                           styleClass="hello-status-label"/>
                 </VBox>
 
             </children>

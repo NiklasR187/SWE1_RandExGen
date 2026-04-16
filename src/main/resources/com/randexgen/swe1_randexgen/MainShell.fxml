@@ -1,59 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<BorderPane xmlns="http://javafx.com/javafx/25"
+<BorderPane fx:id="shellRoot"
+            xmlns="http://javafx.com/javafx/25"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.randexgen.swe1_randexgen.app.MainShellController"
-            style="-fx-background-color: #efefef;">
+            styleClass="shell-root"
+            stylesheets="@styles4.css">
 
     <top>
-        <Pane prefHeight="26.0" style="-fx-background-color: #828282;">
-            <children>
-                <Pane prefHeight="26.0" prefWidth="200.0" style="-fx-background-color: #828282;">
+        <HBox fx:id="topBar"
+              alignment="CENTER_LEFT"
+              prefHeight="34.0"
+              styleClass="shell-topbar">
+
+            <HBox alignment="CENTER_LEFT"
+                  spacing="6"
+                  styleClass="shell-tab-row">
+
+                <Pane fx:id="xmlTab"
+                      prefHeight="26.0"
+                      prefWidth="94.0"
+                      onMouseClicked="#handleXmlTabClick"
+                      styleClass="shell-tab-active">
                     <children>
-
-                        <Pane fx:id="xmlTab"
-                              prefHeight="26.0"
-                              prefWidth="94.0"
-                              onMouseClicked="#handleXmlTabClick"
-                              style="-fx-background-color: #ddded4; -fx-background-radius: 8 8 0 0; -fx-cursor: hand;">
-                            <children>
-                                <Text layoutX="36.0" layoutY="18.0" text="XML">
-                                    <font>
-                                        <Font name="System Bold" size="14.0" />
-                                    </font>
-                                </Text>
-                            </children>
-                        </Pane>
-
-                        <Pane fx:id="pdfTab"
-                              layoutX="100.0"
-                              prefHeight="26.0"
-                              prefWidth="94.0"
-                              onMouseClicked="#handlePdfTabClick"
-                              style="-fx-background-color: #a3a69c; -fx-background-radius: 8 8 0 0; -fx-cursor: hand;">
-                            <children>
-                                <Text layoutX="36.0" layoutY="18.0" text="PDF">
-                                    <font>
-                                        <Font name="System Bold" size="14.0" />
-                                    </font>
-                                </Text>
-                            </children>
-                        </Pane>
-
+                        <Label text="XML"
+                               layoutX="34.0"
+                               layoutY="4.0"
+                               styleClass="shell-tab-text"/>
                     </children>
                 </Pane>
-            </children>
-        </Pane>
+
+                <Pane fx:id="pdfTab"
+                      prefHeight="26.0"
+                      prefWidth="94.0"
+                      onMouseClicked="#handlePdfTabClick"
+                      styleClass="shell-tab-inactive">
+                    <children>
+                        <Label text="PDF"
+                               layoutX="34.0"
+                               layoutY="4.0"
+                               styleClass="shell-tab-text"/>
+                    </children>
+                </Pane>
+
+            </HBox>
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <Button fx:id="themeToggleButton"
+                    text="🌙"
+                    onAction="#toggleDarkMode"
+                    prefWidth="48.0"
+                    prefHeight="26.0"
+                    styleClass="shell-theme-button"/>
+        </HBox>
     </top>
 
     <center>
-        <StackPane fx:id="contentHost" />
+        <StackPane fx:id="contentHost"/>
     </center>
 
 </BorderPane>

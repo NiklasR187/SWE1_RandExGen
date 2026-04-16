@@ -1,0 +1,118 @@
+/* =========================================================
+   MAIN SHELL
+   ========================================================= */
+
+.shell-root {
+    -fx-background-color: #efefef;
+}
+
+.shell-topbar {
+    -fx-background-color: #828282;
+    -fx-padding: 0 10 0 0;
+}
+
+.shell-tab-row {
+    -fx-padding: 0 0 0 6;
+}
+
+.shell-tab-text {
+    -fx-text-fill: #111111;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+/* =========================================================
+   TABS
+   ========================================================= */
+
+.shell-tab-active,
+.shell-tab-inactive {
+    -fx-background-radius: 8 8 0 0;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.10), 6, 0.10, 0, 1);
+}
+
+.shell-tab-active {
+    -fx-background-color: #ddded4;
+}
+
+.shell-tab-inactive {
+    -fx-background-color: #a3a69c;
+}
+
+.shell-tab-active:hover {
+    -fx-background-color: #e7e8df;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.18), 10, 0.14, 0, 2);
+}
+
+.shell-tab-inactive:hover {
+    -fx-background-color: #b5b8af;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.18), 10, 0.14, 0, 2);
+}
+
+/* =========================================================
+   THEME BUTTON
+   ========================================================= */
+
+.shell-theme-button {
+    -fx-background-color: #d9d9d9;
+    -fx-text-fill: black;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 999;
+    -fx-border-radius: 999;
+    -fx-cursor: hand;
+}
+
+.shell-theme-button:hover {
+    -fx-background-color: #cfcfcf;
+}
+
+.shell-theme-button:pressed {
+    -fx-background-color: #c4c4c4;
+}
+
+/* =========================================================
+   DARK MODE
+   ========================================================= */
+
+.shell-root.dark-mode {
+    -fx-background-color: #1f2228;
+}
+
+.shell-root.dark-mode .shell-topbar {
+    -fx-background-color: #2a2f39;
+}
+
+.shell-root.dark-mode .shell-tab-text {
+    -fx-text-fill: #f4f7fb;
+}
+
+.shell-root.dark-mode .shell-tab-active {
+    -fx-background-color: #3a4354;
+}
+
+.shell-root.dark-mode .shell-tab-inactive {
+    -fx-background-color: #2f3542;
+}
+
+.shell-root.dark-mode .shell-tab-active:hover {
+    -fx-background-color: #465167;
+}
+
+.shell-root.dark-mode .shell-tab-inactive:hover {
+    -fx-background-color: #394152;
+}
+
+.shell-root.dark-mode .shell-theme-button {
+    -fx-background-color: #3a3f48;
+    -fx-text-fill: white;
+}
+
+.shell-root.dark-mode .shell-theme-button:hover {
+    -fx-background-color: #474d57;
+}
+
+.shell-root.dark-mode .shell-theme-button:pressed {
+    -fx-background-color: #31353d;
+}

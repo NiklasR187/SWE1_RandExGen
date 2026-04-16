@@ -21,42 +21,6 @@
             stylesheets="@styles2.css"
             styleClass="root-pane">
 
-    <top>
-        <Pane prefHeight="26.0" style="-fx-background-color: #828282;">
-            <children>
-                <Pane prefHeight="26.0" prefWidth="200.0" style="-fx-background-color: #828282;">
-                    <children>
-
-                        <Pane onMouseClicked="#switchToXML" fx:id="xmlPane" prefHeight="26.0" prefWidth="94.0" style="-fx-background-color: #a3a69c; -fx-cursor: hand; -fx-background-radius: 8 8 0 0;">
-                            <children>
-                                <Text layoutX="36.0" layoutY="18.0" text="XML">
-                                    <font>
-                                        <Font name="System Bold" size="14.0" />
-                                    </font>
-                                </Text>
-                            </children>
-                        </Pane>
-
-                        <Pane fx:id="pdfPane"
-                              layoutX="100.0"
-                              prefHeight="26.0"
-                              prefWidth="94.0"
-                              style="-fx-background-color: #ddded4; -fx-background-radius: 8 8 0 0;">
-                            <children>
-                                <Text layoutX="36.0" layoutY="18.0" text="PDF">
-                                    <font>
-                                        <Font name="System Bold" size="14.0" />
-                                    </font>
-                                </Text>
-                            </children>
-                        </Pane>
-
-                    </children>
-                </Pane>
-            </children>
-        </Pane>
-    </top>
-
     <center>
         <AnchorPane styleClass="content-area">
             <children>

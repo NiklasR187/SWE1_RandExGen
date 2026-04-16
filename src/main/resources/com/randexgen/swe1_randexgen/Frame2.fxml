@@ -1,61 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 <?import javafx.scene.layout.Region?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/25"
+<BorderPane fx:id="rootPane"
+            styleClass="root-pane"
+            xmlns="http://javafx.com/javafx/25"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.randexgen.swe1_randexgen.controller.frame2Controller"
-            style="-fx-background-color: white;" stylesheets="@styles.css">
-
-    <top>
-        <Pane prefHeight="26.0" style="-fx-background-color: #828282;">
-            <children>
-                <Pane prefHeight="26.0" prefWidth="200.0" style="-fx-background-color: #828282;">
-                    <children>
-
-                        <Pane prefHeight="26.0" prefWidth="94.0" style="-fx-background-color: #ddded4; -fx-background-radius: 8 8 0 0;">
-                            <children>
-                                <Text layoutX="36.0" layoutY="18.0" text="XML">
-                                    <font>
-                                        <Font name="System Bold" size="14.0" />
-                                    </font>
-                                </Text>
-                            </children>
-                        </Pane>
-
-                        <Pane fx:id="pdfPane"
-                              layoutX="100.0"
-                              prefHeight="26.0"
-                              prefWidth="94.0"
-                              style="-fx-background-color: #a3a69c; -fx-cursor: hand; -fx-background-radius: 8 8 0 0;"
-                              onMouseClicked="#switchToPDF">
-                            <children>
-                                <Text layoutX="36.0" layoutY="18.0" text="PDF">
-                                    <font>
-                                        <Font name="System Bold" size="14.0" />
-                                    </font>
-                                </Text>
-                            </children>
-                        </Pane>
-
-                    </children>
-                </Pane>
-            </children>
-        </Pane>
-    </top>
+            stylesheets="@styles.css">
 
     <left>
-        <BorderPane prefWidth="320.0"
-                    style="-fx-background-color: #dcdcdc;">
+        <BorderPane prefWidth="320.0" styleClass="sidebar-pane">
 
             <center>
                 <ScrollPane fx:id="overviewScrollPane"
@@ -65,7 +26,7 @@
                     <content>
                         <VBox fx:id="chapterOverviewBox"
                               spacing="12.0"
-                              style="-fx-background-color: #dcdcdc; -fx-padding: 10;" />
+                              styleClass="sidebar-content"/>
                     </content>
                 </ScrollPane>
             </center>
@@ -73,20 +34,20 @@
             <bottom>
                 <HBox alignment="CENTER"
                       spacing="10.0"
-                      style="-fx-padding: 10 25 10 10; -fx-background-color: #dcdcdc;">
+                      styleClass="sidebar-footer">
                     <Button fx:id="expandAllButton"
                             text="Expand all"
                             onAction="#handleExpandAll"
                             styleClass="expand-button"
-                            prefWidth="130.0" />
+                            prefWidth="130.0"/>
 
-                    <Region HBox.hgrow="ALWAYS" />
+                    <Region HBox.hgrow="ALWAYS"/>
 
                     <Button fx:id="collapseAllButton"
                             text="Collapse all"
                             onAction="#handleCollapseAll"
                             styleClass="expand-button"
-                            prefWidth="130.0" />
+                            prefWidth="130.0"/>
                 </HBox>
             </bottom>
 
@@ -94,30 +55,45 @@
     </left>
 
     <center>
-        <BorderPane style="-fx-background-color: #f0f0f0; -fx-padding: 20 30 20 30;">
+        <BorderPane styleClass="editor-pane">
 
             <top>
                 <HBox alignment="CENTER_LEFT" spacing="10.0">
-                    <Button fx:id="saveButton" styleClass="top-button" text="Save" prefWidth="140.0" onAction="#handleSave" />
-                    <Button fx:id="saveAsButton" styleClass="top-button" text="Save As" prefWidth="140.0" onAction="#handleSaveAs" />
-                    <Button fx:id="closeButton" styleClass="top-button" text="Close" prefWidth="140.0" onAction="#handleClose" />
+                    <Button fx:id="saveButton"
+                            styleClass="top-button"
+                            text="Save"
+                            prefWidth="140.0"
+                            onAction="#handleSave"/>
+
+                    <Button fx:id="saveAsButton"
+                            styleClass="top-button"
+                            text="Save As"
+                            prefWidth="140.0"
+                            onAction="#handleSaveAs"/>
+
+                    <Button fx:id="closeButton"
+                            styleClass="top-button"
+                            text="Close"
+                            prefWidth="140.0"
+                            onAction="#handleClose"/>
 
                     <Region HBox.hgrow="ALWAYS"/>
 
-                    <!-- Status Label -->
                     <Label fx:id="saveStatusLabel"
-                        text=""
-                        style="-fx-text-fill: green; -fx-font-weight: bold;"/>
+                           text=""
+                           styleClass="status-label"/>
                 </HBox>
             </top>
 
             <center>
-                <ScrollPane fx:id="editorScrollPane" styleClass="modern-scrollpane" fitToWidth="true" style="-fx-background-color: transparent;">
+                <ScrollPane fx:id="editorScrollPane"
+                            fitToWidth="true"
+                            styleClass="modern-scrollpane">
                     <content>
                         <VBox fx:id="editorContentBox"
                               fillWidth="true"
                               spacing="10.0"
-                              style="-fx-padding: 15 10 20 0;" />
+                              styleClass="editor-content"/>
                     </content>
                 </ScrollPane>
             </center>
@@ -125,7 +101,7 @@
             <bottom>
                 <HBox fx:id="bottomActionBox"
                       alignment="CENTER"
-                      style="-fx-padding: 15 0 0 0;" />
+                      styleClass="bottom-action-box"/>
             </bottom>
 
         </BorderPane>
