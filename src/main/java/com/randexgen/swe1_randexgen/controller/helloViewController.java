@@ -1,18 +1,15 @@
 package com.randexgen.swe1_randexgen.controller;
 
+import com.randexgen.swe1_randexgen.app.AppNavigator;
 import com.randexgen.swe1_randexgen.service.AppState;
 import com.randexgen.swe1_randexgen.service.XMLFileValidator;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.control.Alert;
 import java.io.File;
 import java.io.FileWriter;
-
-import java.util.Optional;
 
 /**
  * Controller for the start view of the application.
@@ -97,29 +94,7 @@ public class helloViewController {
      * @param xmlFile the XML file to load in the next view
      */
     private void openFrame2(File xmlFile) {
-        try {
-            // Load the second FXML view and create its scene
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/randexgen/swe1_randexgen/Frame2.fxml"));
-            Scene scene = new Scene(loader.load());
-
-            frame2Controller controller = loader.getController();
-
-            // Replace the current scene with the second application view
-            Stage stage = (Stage) welcomeText.getScene().getWindow();
-            stage.setResizable(true);
-            stage.setScene(scene);
-            stage.show();
-
-            // Refresh the maximized state and load the XML file afterwards
-            javafx.application.Platform.runLater(() -> {
-                stage.setMaximized(false);
-                stage.setMaximized(true);
-                controller.loadXml(xmlFile);
-            });
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        AppNavigator.showEditor(xmlFile);
     }
 
     /**

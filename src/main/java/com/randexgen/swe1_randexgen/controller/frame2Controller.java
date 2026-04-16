@@ -1,12 +1,12 @@
 package com.randexgen.swe1_randexgen.controller;
 
+import com.randexgen.swe1_randexgen.app.AppNavigator;
 import com.randexgen.swe1_randexgen.datamodel.*;
 import com.randexgen.swe1_randexgen.service.AppState;
 import com.randexgen.swe1_randexgen.service.DataValidator;
 import com.randexgen.swe1_randexgen.service.ScoreCalculator;
 import com.randexgen.swe1_randexgen.service.XMLParser;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -14,8 +14,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.layout.*;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.util.Optional;
 import javafx.stage.FileChooser;
@@ -82,6 +80,9 @@ public class frame2Controller {
 
     private Label subtaskWarningLabel;
 
+    private String defaultExpandStyle;
+    private String defaultCollapseStyle;
+
     /**
      * Initializes the editor view after the FXML file has been loaded.
      *
@@ -104,25 +105,30 @@ public class frame2Controller {
             bottomActionBox.getChildren().clear();
         }
 
-        updateExpandCollapseButtons(true);
+        defaultExpandStyle = expandAllButton.getStyle();
+        defaultCollapseStyle = collapseAllButton.getStyle();
 
-            Platform.runLater(() -> {
-                Stage stage = (Stage) closeButton.getScene().getWindow();
+        // UI/UX-Rule "Guidance":
+        // Button states should always reflect the real expand/collapse state.
+        refreshExpandCollapseButtonState();
 
-                stage.setOnCloseRequest(event -> {
-                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                    alert.setTitle("Confirm");
-                    alert.setHeaderText("Close application?");
-                    alert.setContentText("Your unsaved progress will be lost.");
+        Platform.runLater(() -> {
+            Stage stage = (Stage) closeButton.getScene().getWindow();
 
-                    Optional<ButtonType> result = alert.showAndWait();
+            stage.setOnCloseRequest(event -> {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Confirm");
+                alert.setHeaderText("Close application?");
+                alert.setContentText("Your unsaved progress will be lost.");
 
-                    if (result.isEmpty() || result.get() != ButtonType.OK) {
-                        event.consume();
-                    }
-                });
+                Optional<ButtonType> result = alert.showAndWait();
+
+                if (result.isEmpty() || result.get() != ButtonType.OK) {
+                    event.consume();
+                }
             });
-        }
+        });
+    }
 
     /**
      * Saves the currently edited exam to the existing XML file.
@@ -200,7 +206,6 @@ public class frame2Controller {
      */
     @FXML
     private void handleClose() {
-        // Ask the user for confirmation before leaving the editor
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirm");
         alert.setHeaderText("Go back to start page?");
@@ -209,26 +214,8 @@ public class frame2Controller {
         Optional<ButtonType> result = alert.showAndWait();
 
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            try {
-                // Reset the shared application state before returning to the start page
-                AppState.reset();
-
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/randexgen/swe1_randexgen/hello-view.fxml"));
-                Scene scene = new Scene(loader.load());
-
-                Stage stage = (Stage) closeButton.getScene().getWindow();
-                stage.setScene(scene);
-                stage.show();
-
-                // Refresh the maximized state after switching back to the start view
-                Platform.runLater(() -> {
-                    stage.setMaximized(false);
-                    stage.setMaximized(true);
-                });
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            AppState.reset();
+            AppNavigator.showStartView();
         }
     }
 
@@ -402,6 +389,7 @@ public class frame2Controller {
             arrowLabel.setOnMouseClicked(e -> {
                 boolean newState = !chapterExpandedState.getOrDefault(chapter.getId(), true);
                 chapterExpandedState.put(chapter.getId(), newState);
+
                 buildLeftOverview(currentExam);
             });
 
@@ -434,6 +422,51 @@ public class frame2Controller {
                 }
             }
         }
+        refreshExpandCollapseButtonState();
+    }
+
+    private void refreshExpandCollapseButtonState() {
+        if (currentExam == null || currentExam.getChapters() == null || currentExam.getChapters().isEmpty()) {
+            updateExpandCollapseButtonsDisabled();
+            return;
+        }
+
+        boolean allExpanded = true;
+        boolean allCollapsed = true;
+
+        for (Chapter chapter : currentExam.getChapters()) {
+            boolean expanded = chapterExpandedState.getOrDefault(chapter.getId(), true);
+
+            if (expanded) {
+                allCollapsed = false;
+            } else {
+                allExpanded = false;
+            }
+        }
+
+        if (allExpanded) {
+            updateExpandCollapseButtons(true);
+        } else if (allCollapsed) {
+            updateExpandCollapseButtons(false);
+        } else {
+            updateExpandCollapseButtonsNeutral();
+        }
+    }
+
+    private void updateExpandCollapseButtonsDisabled() {
+        expandAllButton.setDisable(true);
+        collapseAllButton.setDisable(true);
+
+        expandAllButton.setStyle(defaultExpandStyle);
+        collapseAllButton.setStyle(defaultCollapseStyle);
+    }
+
+    private void updateExpandCollapseButtonsNeutral() {
+        expandAllButton.setDisable(false);
+        collapseAllButton.setDisable(false);
+
+        expandAllButton.setStyle(defaultExpandStyle);
+        collapseAllButton.setStyle(defaultCollapseStyle);
     }
 
     /**
@@ -446,16 +479,12 @@ public class frame2Controller {
     @FXML
     private void handleExpandAll() {
 
-        // Set all chapters to expanded (true)
         for (Chapter chapter : currentExam.getChapters()) {
             chapterExpandedState.put(chapter.getId(), true);
         }
 
-        // Rebuild the UI to reflect the updated expand state
         buildLeftOverview(currentExam);
-
-        // Update button styles (Expand = active)
-        updateExpandCollapseButtons(true);
+        refreshExpandCollapseButtonState();
     }
 
     /**
@@ -468,16 +497,12 @@ public class frame2Controller {
     @FXML
     private void handleCollapseAll() {
 
-        // Set all chapters to collapsed (false)
         for (Chapter chapter : currentExam.getChapters()) {
             chapterExpandedState.put(chapter.getId(), false);
         }
 
-        // Rebuild the UI to reflect the updated collapse state
         buildLeftOverview(currentExam);
-
-        // Update button styles (Collapse = active)
-        updateExpandCollapseButtons(false);
+        refreshExpandCollapseButtonState();
     }
 
     /**
@@ -1532,29 +1557,14 @@ public class frame2Controller {
      * The current exam and file references are stored in the application state
      * so that the PDF view can access the same data.
      */
-@FXML
-private void switchToPDF() {
-    try {
-        AppState.setCurrentExam(currentExam);
-        AppState.setCurrentXmlFile(currentXmlFile);
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/randexgen/swe1_randexgen/pdfviewer.fxml"));
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-
-        Stage stage = (Stage) pdfPane.getScene().getWindow();
-        boolean wasMaximized = stage.isMaximized();
-
-        stage.setResizable(true);
-        stage.setScene(scene);
-        stage.show();
-
-        if (wasMaximized) {
-            javafx.application.Platform.runLater(() -> stage.setMaximized(true));
+    @FXML
+    private void switchToPDF() {
+        try {
+            AppState.setCurrentExam(currentExam);
+            AppState.setCurrentXmlFile(currentXmlFile);
+            AppNavigator.showPdf();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-    } catch (Exception e) {
-        e.printStackTrace();
     }
-}
 }

@@ -1,5 +1,6 @@
 package com.randexgen.swe1_randexgen.controller;
 
+import com.randexgen.swe1_randexgen.app.AppNavigator;
 import com.randexgen.swe1_randexgen.datamodel.Exam;
 import com.randexgen.swe1_randexgen.datamodel.ExamType;
 import com.randexgen.swe1_randexgen.service.*;
@@ -10,8 +11,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.scene.control.TextArea;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.text.Text;
 import javafx.stage.DirectoryChooser;
 import java.io.File;
@@ -21,6 +20,7 @@ import java.util.Optional;
 import javafx.scene.layout.Region;
 import java.util.List;
 import javafx.scene.layout.VBox;
+
 
 /**
  * Controller for the PDF preview view of the application.
@@ -91,71 +91,7 @@ public class PdfviewerController {
      */
     @FXML
     private void switchToXML() {
-
-        // If a regular or practice Exam is generated
-        if(ExamGenerator.regularExamGenerated || ExamGenerator.practiceExamGenerated) {
-            // Ask the user for confirmation before leaving the PDF view
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Confirm");
-            alert.setHeaderText("Go back to XML view?");
-            alert.setContentText("The generated exam will be discarded and any unsaved changes will be lost.");
-
-            Optional<ButtonType> result = alert.showAndWait();
-
-
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            try {
-                // Load the XML editor view and create the new scene
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/randexgen/swe1_randexgen/Frame2.fxml"));
-                Scene scene = new Scene(loader.load());
-
-                frame2Controller controller = loader.getController();
-
-                // Replace the current scene with the XML editor scene
-                Stage stage = (Stage) xmlPane.getScene().getWindow();
-                stage.setResizable(true);
-                stage.setScene(scene);
-                stage.show();
-
-                ExamGenerator.regularExamGenerated = false;
-                ExamGenerator.practiceExamGenerated = false;
-                // Restore the stage size and pass the current exam data to the controller
-                javafx.application.Platform.runLater(() -> {
-                    stage.setMaximized(false);
-                    stage.setMaximized(true);
-                    controller.setExamData(AppState.getCurrentExam(), AppState.getCurrentXmlFile());
-                });
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }}
-        //If no exam is generated
-        else {
-            try {
-                // Load the XML editor view and create the new scene
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/randexgen/swe1_randexgen/Frame2.fxml"));
-                Scene scene = new Scene(loader.load());
-
-                frame2Controller controller = loader.getController();
-
-                // Replace the current scene with the XML editor scene
-                Stage stage = (Stage) xmlPane.getScene().getWindow();
-                stage.setResizable(true);
-                stage.setScene(scene);
-                stage.show();
-
-                // Restore the stage size and pass the current exam data to the controller
-                javafx.application.Platform.runLater(() -> {
-                    stage.setMaximized(false);
-                    stage.setMaximized(true);
-                    controller.setExamData(AppState.getCurrentExam(), AppState.getCurrentXmlFile());
-                });
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+        AppNavigator.showEditor(AppState.getCurrentExam(), AppState.getCurrentXmlFile());
     }
 
     /**

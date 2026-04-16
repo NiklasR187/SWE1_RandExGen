@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane xmlns="http://javafx.com/javafx/25"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.randexgen.swe1_randexgen.app.MainShellController"
+            style="-fx-background-color: #efefef;">
+
+    <top>
+        <Pane prefHeight="26.0" style="-fx-background-color: #828282;">
+            <children>
+                <Pane prefHeight="26.0" prefWidth="200.0" style="-fx-background-color: #828282;">
+                    <children>
+
+                        <Pane fx:id="xmlTab"
+                              prefHeight="26.0"
+                              prefWidth="94.0"
+                              onMouseClicked="#handleXmlTabClick"
+                              style="-fx-background-color: #ddded4; -fx-background-radius: 8 8 0 0; -fx-cursor: hand;">
+                            <children>
+                                <Text layoutX="36.0" layoutY="18.0" text="XML">
+                                    <font>
+                                        <Font name="System Bold" size="14.0" />
+                                    </font>
+                                </Text>
+                            </children>
+                        </Pane>
+
+                        <Pane fx:id="pdfTab"
+                              layoutX="100.0"
+                              prefHeight="26.0"
+                              prefWidth="94.0"
+                              onMouseClicked="#handlePdfTabClick"
+                              style="-fx-background-color: #a3a69c; -fx-background-radius: 8 8 0 0; -fx-cursor: hand;">
+                            <children>
+                                <Text layoutX="36.0" layoutY="18.0" text="PDF">
+                                    <font>
+                                        <Font name="System Bold" size="14.0" />
+                                    </font>
+                                </Text>
+                            </children>
+                        </Pane>
+
+                    </children>
+                </Pane>
+            </children>
+        </Pane>
+    </top>
+
+    <center>
+        <StackPane fx:id="contentHost" />
+    </center>
+
+</BorderPane>
