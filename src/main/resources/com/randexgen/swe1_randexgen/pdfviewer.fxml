@@ -22,14 +22,17 @@
             styleClass="root-pane">
 
     <center>
-        <AnchorPane styleClass="content-area">
+        <HBox spacing="25.0" styleClass="content-area">
+            <padding>
+                <Insets top="25.0" right="25.0" bottom="25.0" left="25.0"/>
+            </padding>
+
             <children>
 
                 <!-- Linke Sidebar -->
-                <VBox
-                      layoutY="25.0"
-                      prefWidth="280.0"
-                      prefHeight="820.0"
+                <VBox prefWidth="280.0"
+                      minWidth="280.0"
+                      maxWidth="280.0"
                       spacing="20.0"
                       styleClass="sidebar-card">
 
@@ -116,16 +119,9 @@
                 </VBox>
 
                 <!-- Rechte Preview Area -->
-                <VBox layoutX="325.0"
-                      layoutY="25.0"
-                      prefWidth="1235.0"
-                      prefHeight="820.0"
-                      spacing="18.0"
-                      styleClass="preview-wrapper">
-
-                    <padding>
-                        <Insets top="0.0" right="0.0" bottom="0.0" left="0.0"/>
-                    </padding>
+                <VBox spacing="18.0"
+                      styleClass="preview-wrapper"
+                      HBox.hgrow="ALWAYS">
 
                     <children>
                         <HBox alignment="CENTER_LEFT" prefHeight="50.0">
@@ -139,14 +135,12 @@
                             </children>
                         </HBox>
 
-                        <StackPane prefWidth="1235.0"
-                                   prefHeight="752.0"
-                                   styleClass="preview-card">
+                        <StackPane styleClass="preview-card"
+                                   VBox.vgrow="ALWAYS">
                             <children>
                                 <ScrollPane fx:id="previewScrollPane"
                                             fitToWidth="true"
-                                            prefWidth="1210.0"
-                                            prefHeight="730.0"
+                                            fitToHeight="true"
                                             style="-fx-background: #d9d9d9; -fx-background-color: #d9d9d9;">
                                     <content>
                                         <VBox fx:id="previewPagesBox"
@@ -162,6 +156,6 @@
                 </VBox>
 
             </children>
-        </AnchorPane>
+        </HBox>
     </center>
 </BorderPane>

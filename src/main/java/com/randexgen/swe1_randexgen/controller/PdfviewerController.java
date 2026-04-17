@@ -30,9 +30,6 @@ import javafx.scene.layout.VBox;
  */
 public class PdfviewerController {
 
-    @FXML
-    private Pane xmlPane;
-
     private Exam currentExam;
 
     @FXML
@@ -219,28 +216,17 @@ public class PdfviewerController {
     private TextArea createAnswerPreviewBox(String answerText) {
         String safeAnswerText = answerText == null ? "" : answerText.trim();
 
-        // Create a non-editable text area used as a visual answer box
         TextArea answerBox = new TextArea();
         answerBox.setEditable(false);
         answerBox.setWrapText(true);
         answerBox.setText(safeAnswerText);
 
-        // Apply a fixed width so all preview boxes are aligned consistently
         answerBox.setPrefWidth(680);
         answerBox.setMaxWidth(680);
         answerBox.setMinWidth(680);
 
-        // Apply styling to make the preview box resemble a PDF answer field
-        answerBox.setStyle(
-                "-fx-control-inner-background: white;" +
-                        "-fx-background-color: white;" +
-                        "-fx-border-color: #444444;" +
-                        "-fx-border-width: 1;" +
-                        "-fx-font-size: 13px;" +
-                        "-fx-padding: 8;"
-        );
+        answerBox.getStyleClass().add("answer-preview-box");
 
-        // Calculate and apply the required box height based on the answer text
         double minHeight = 90;
         double calculatedHeight = calculateAnswerBoxHeight(safeAnswerText);
         double finalHeight = Math.max(minHeight, calculatedHeight);
@@ -283,39 +269,32 @@ public class PdfviewerController {
      * @param generatedTasks the generated tasks to display in the preview
      */
     private void showGeneratedExamInPreview(List<GeneratedTask> generatedTasks) {
-        // Clear all previous preview content before rendering the new state
         previewPagesBox.getChildren().clear();
 
-        // Show a placeholder preview if no exam has been generated yet
         if (generatedTasks == null || generatedTasks.isEmpty()) {
             VBox emptyPage = createPdfLikePage();
 
             Text title = new Text("No PDF generated yet");
-            title.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;");
+            title.getStyleClass().add("empty-preview-title");
 
             Text subtitle = new Text("Select an exam type and click Generate Exam.");
-            subtitle.setStyle("-fx-font-size: 14px; -fx-fill: #666666;");
+            subtitle.getStyleClass().add("empty-preview-subtitle");
 
             emptyPage.getChildren().addAll(title, subtitle);
             previewPagesBox.getChildren().add(emptyPage);
             return;
         }
 
-        // Create the main preview page that visually imitates an A4 PDF layout
         VBox page = createPdfLikePage();
 
         this.currentExam = AppState.getCurrentExam();
         Text documentTitle = new Text(
                 currentExam != null ? currentExam.getTitle() : "Generated Exam"
         );
-
-        documentTitle.setStyle(
-                "-fx-font-size: 25px;" +
-                        "-fx-font-weight: bold;"
-        );
+        documentTitle.getStyleClass().add("pdf-document-title");
 
         Text examTypeText = new Text("Exam Type: " + currentGeneratedExamType);
-        examTypeText.setStyle("-fx-font-size: 14px; -fx-fill: #444444;");
+        examTypeText.getStyleClass().add("pdf-exam-type");
 
         Region spacer = new Region();
         spacer.setMinHeight(10);
@@ -325,17 +304,12 @@ public class PdfviewerController {
         String lastChapter = null;
         int taskNumber = 1;
 
-        // Render all generated tasks grouped by chapter
         for (GeneratedTask task : generatedTasks) {
             String chapterTitle = task.getChapter().getTitle();
 
-            // Insert a new chapter heading whenever the chapter changes
             if (lastChapter == null || !lastChapter.equals(chapterTitle)) {
                 Text chapterText = new Text(chapterTitle);
-                chapterText.setStyle(
-                        "-fx-font-size: 18px;" +
-                                "-fx-font-weight: bold;"
-                );
+                chapterText.getStyleClass().add("pdf-chapter-title");
 
                 Region chapterSpacer = new Region();
                 chapterSpacer.setMinHeight(12);
@@ -344,19 +318,17 @@ public class PdfviewerController {
                 lastChapter = chapterTitle;
             }
 
-            // Build the task header and task description for the current generated task
             Text taskHeader = new Text(
                     taskNumber + ". " +
                             task.getSubtask().getTitle() +
                             " (" + task.getSubtask().getScore() + " P)"
             );
-            taskHeader.setStyle("-fx-font-size: 15px; -fx-font-weight: bold;");
+            taskHeader.getStyleClass().add("pdf-task-header");
 
             Text taskText = new Text(task.getVariant().getTaskText());
             taskText.setWrappingWidth(680);
-            taskText.setStyle("-fx-font-size: 14px; -fx-fill: #111111;");
+            taskText.getStyleClass().add("pdf-task-text");
 
-            // Create the preview box for the corresponding answer text
             TextArea answerBox = createAnswerPreviewBox(task.getVariant().getAnswerText());
 
             Region taskSpacer = new Region();
@@ -376,7 +348,6 @@ public class PdfviewerController {
             taskNumber++;
         }
 
-        // Add the finished preview page to the preview container
         previewPagesBox.getChildren().add(page);
     }
 
@@ -389,19 +360,12 @@ public class PdfviewerController {
      * @return a styled VBox representing a PDF-like page
      */
     private VBox createPdfLikePage() {
-        // Create a page container with an A4-like size and visual styling
         VBox page = new VBox();
-        page.setPrefWidth(794);   // ungefähr A4-Proportion auf Bildschirm
+        page.setPrefWidth(794);
         page.setMaxWidth(794);
         page.setMinWidth(794);
         page.setSpacing(12);
-        page.setStyle(
-                "-fx-background-color: white;" +
-                        "-fx-padding: 50 55 50 55;" +
-                        "-fx-border-color: #cfcfcf;" +
-                        "-fx-border-width: 1;" +
-                        "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.18), 18, 0.15, 0, 3);"
-        );
+        page.getStyleClass().add("pdf-page");
         return page;
     }
 }
