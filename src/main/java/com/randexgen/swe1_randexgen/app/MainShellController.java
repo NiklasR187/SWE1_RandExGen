@@ -73,6 +73,7 @@ public class MainShellController {
     /**
      * Toggles dark mode for the entire shell and the currently displayed content.
      */
+    // UI/UX-Rule "Novelty": dark mode adds a modern and engaging interaction element to the application.
     @FXML
     private void toggleDarkMode() {
         darkModeEnabled = !darkModeEnabled;

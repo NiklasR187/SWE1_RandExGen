@@ -1,0 +1,55 @@
+Date : 2026-04-17 22:22:42
+Directory : c:\Users\nikre\Documents\GitHub\SWE1_RandExGen
+Total : 16 files,  1761 codes, 38 comments, 295 blanks, all 2094 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| PostCSS  |          4 |        892 |         72 |        239 |      1,203 |
+| XML      |          6 |        685 |         -1 |         16 |        700 |
+| Java     |          6 |        184 |        -33 |         40 |        191 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++-------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                          | files      | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                             |         16 |      1,761 |         38 |        295 |      2,094 |
+| demodata                                                                                                                      |          2 |        650 |          0 |          5 |        655 |
+| src                                                                                                                           |         14 |      1,111 |         38 |        290 |      1,439 |
+| src\main                                                                                                                      |         14 |      1,111 |         38 |        290 |      1,439 |
+| src\main\java                                                                                                                 |          6 |        184 |        -33 |         40 |        191 |
+| src\main\java\com                                                                                                             |          6 |        184 |        -33 |         40 |        191 |
+| src\main\java\com\randexgen                                                                                                   |          6 |        184 |        -33 |         40 |        191 |
+| src\main\java\com\randexgen\swe1_randexgen                                                                                    |          6 |        184 |        -33 |         40 |        191 |
+| src\main\java\com\randexgen\swe1_randexgen\app                                                                                |          3 |        202 |        101 |         43 |        346 |
+| src\main\java\com\randexgen\swe1_randexgen\controller                                                                         |          3 |        -18 |       -134 |         -3 |       -155 |
+| src\main\resources                                                                                                            |          8 |        927 |         71 |        250 |      1,248 |
+| src\main\resources\com                                                                                                        |          8 |        927 |         71 |        250 |      1,248 |
+| src\main\resources\com\randexgen                                                                                              |          8 |        927 |         71 |        250 |      1,248 |
+| src\main\resources\com\randexgen\swe1_randexgen                                                                               |          8 |        927 |         71 |        250 |      1,248 |
++-------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-------------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                                                                      | language | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| c:\Users\nikre\Documents\GitHub\SWE1_RandExGen\demodata\practice_exam_xml.xml                                                 | XML      |        294 |          0 |          4 |        298 |
+| c:\Users\nikre\Documents\GitHub\SWE1_RandExGen\demodata\regular_exam_xml.xml                                                  | XML      |        356 |          0 |          1 |        357 |
+| c:\Users\nikre\Documents\GitHub\SWE1_RandExGen\src\main\java\com\randexgen\swe1_randexgen\app\AppNavigator.java               | Java     |         31 |         37 |          9 |         77 |
+| c:\Users\nikre\Documents\GitHub\SWE1_RandExGen\src\main\java\com\randexgen\swe1_randexgen\app\HelloApplication.java           | Java     |          0 |        -21 |         -2 |        -23 |
+| c:\Users\nikre\Documents\GitHub\SWE1_RandExGen\src\main\java\com\randexgen\swe1_randexgen\app\MainShellController.java        | Java     |        171 |         85 |         36 |        292 |
+| c:\Users\nikre\Documents\GitHub\SWE1_RandExGen\src\main\java\com\randexgen\swe1_randexgen\controller\PdfviewerController.java | Java     |        -65 |        -22 |        -13 |       -100 |
+| c:\Users\nikre\Documents\GitHub\SWE1_RandExGen\src\main\java\com\randexgen\swe1_randexgen\controller\frame2Controller.java    | Java     |         64 |       -109 |         15 |        -30 |
+| c:\Users\nikre\Documents\GitHub\SWE1_RandExGen\src\main\java\com\randexgen\swe1_randexgen\controller\helloViewController.java | Java     |        -17 |         -3 |         -5 |        -25 |
+| c:\Users\nikre\Documents\GitHub\SWE1_RandExGen\src\main\resources\com\randexgen\swe1_randexgen\Frame2.fxml                    | XML      |        -18 |         -1 |          0 |        -19 |
+| c:\Users\nikre\Documents\GitHub\SWE1_RandExGen\src\main\resources\com\randexgen\swe1_randexgen\MainShell.fxml                 | XML      |         60 |          0 |         11 |         71 |
+| c:\Users\nikre\Documents\GitHub\SWE1_RandExGen\src\main\resources\com\randexgen\swe1_randexgen\hello-view.fxml                | XML      |         27 |          0 |          4 |         31 |
+| c:\Users\nikre\Documents\GitHub\SWE1_RandExGen\src\main\resources\com\randexgen\swe1_randexgen\pdfviewer.fxml                 | XML      |        -34 |          0 |         -4 |        -38 |
+| c:\Users\nikre\Documents\GitHub\SWE1_RandExGen\src\main\resources\com\randexgen\swe1_randexgen\styles.css                     | PostCSS  |        502 |         43 |        125 |        670 |
+| c:\Users\nikre\Documents\GitHub\SWE1_RandExGen\src\main\resources\com\randexgen\swe1_randexgen\styles2.css                    | PostCSS  |        158 |          0 |         51 |        209 |
+| c:\Users\nikre\Documents\GitHub\SWE1_RandExGen\src\main\resources\com\randexgen\swe1_randexgen\styles3.css                    | PostCSS  |        133 |         17 |         34 |        184 |
+| c:\Users\nikre\Documents\GitHub\SWE1_RandExGen\src\main\resources\com\randexgen\swe1_randexgen\styles4.css                    | PostCSS  |         99 |         12 |         29 |        140 |
+| Total                                                                                                                         |          |      1,761 |         38 |        295 |      2,094 |
++-------------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+

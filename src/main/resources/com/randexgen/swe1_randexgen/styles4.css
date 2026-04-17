@@ -30,6 +30,9 @@
     -fx-background-radius: 8 8 0 0;
     -fx-cursor: hand;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.10), 6, 0.10, 0, 1);
+
+    -fx-scale-x: 1.0;
+    -fx-scale-y: 1.0;
 }
 
 .shell-tab-active {
@@ -50,6 +53,12 @@
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.18), 10, 0.14, 0, 2);
 }
 
+.shell-tab-active:hover,
+.shell-tab-inactive:hover {
+    -fx-scale-x: 1.06;
+    -fx-scale-y: 1.06;
+}
+
 /* =========================================================
    THEME BUTTON
    ========================================================= */
@@ -62,6 +71,13 @@
     -fx-background-radius: 999;
     -fx-border-radius: 999;
     -fx-cursor: hand;
+}
+
+.shell-root.dark-mode .shell-tab-active:hover,
+.shell-root.dark-mode .shell-tab-inactive:hover {
+    -fx-scale-x: 1.08;
+    -fx-scale-y: 1.08;
+    -fx-translate-y: -2;
 }
 
 .shell-theme-button:hover {
@@ -115,4 +131,10 @@
 
 .shell-root.dark-mode .shell-theme-button:pressed {
     -fx-background-color: #31353d;
+}
+
+.shell-root.dark-mode .shell-tab-active:hover,
+.shell-root.dark-mode .shell-tab-inactive:hover {
+    -fx-scale-x: 1.08;
+    -fx-scale-y: 1.08;
 }

@@ -27,13 +27,16 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.SVGPath;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -148,6 +151,7 @@ public class frame2Controller {
 
         try {
             saveExamToFile(currentXmlFile);
+            // UI/UX-Rule "Guidance": a short success message confirms that the save action worked as expected.
             saveStatusLabel.setText("Saved: " + currentXmlFile.getName() + " ✓");
 
             PauseTransition pause = new PauseTransition(Duration.seconds(2));
@@ -203,6 +207,7 @@ public class frame2Controller {
      * The current application state is reset and all unsaved editor changes
      * are discarded.
      */
+    //UI/UX-Rule "Empathy": confirm potentially destructive actions to protect the user from accidental data loss.
     @FXML
     private void handleClose() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -488,16 +493,18 @@ public class frame2Controller {
         button.setPrefWidth(210);
         button.getStyleClass().add("bottom-action-button");
 
-        ImageView plusIcon = new ImageView(
-                new Image(getClass().getResourceAsStream("/images/Plus.png"))
-        );
-        plusIcon.setFitWidth(22);
-        plusIcon.setFitHeight(22);
-        plusIcon.setPreserveRatio(true);
-        plusIcon.setCursor(Cursor.DEFAULT);
+        SVGPath plusIcon = new SVGPath();
+        plusIcon.setContent("M11 5h2v6h6v2h-6v6h-2v-6H5v-2h6V5Z");
+        plusIcon.getStyleClass().add("action-icon");
+
+        plusIcon.setScaleX(1.4);
+        plusIcon.setScaleY(1.4);
+
+        plusIcon.setPickOnBounds(true);
 
         button.setGraphic(plusIcon);
         button.setGraphicTextGap(10);
+
         button.setOnAction(e -> action.run());
 
         bottomActionBox.getChildren().add(button);
@@ -547,7 +554,17 @@ public class frame2Controller {
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
 
-        ImageView editButton = createHoverIcon("/images/edit.png", 25, 25);
+        SVGPath editIcon = new SVGPath();
+        editIcon.setContent("M4 16.5V20h3.5L17.8 9.7l-3.5-3.5L4 16.5ZM20.7 6.3a1 1 0 0 0 0-1.4l-1.6-1.6a1 1 0 0 0-1.4 0l-1.3 1.3 3.5 3.5 1.3-1.3Z");
+        editIcon.getStyleClass().add("action-icon");
+        editIcon.setScaleX(1.4);
+        editIcon.setScaleY(1.4);
+        editIcon.setMouseTransparent(true);
+
+        StackPane editButton = new StackPane(editIcon);
+        editButton.getStyleClass().add("icon-button");
+        editButton.setPickOnBounds(true);
+        Tooltip.install(editButton, new Tooltip("Rename exam"));
 
         row.getChildren().addAll(
                 titleLabel,
@@ -667,8 +684,29 @@ public class frame2Controller {
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
 
-        ImageView editButton = createHoverIcon("/images/edit.png", 25, 25);
-        ImageView deleteButton = createHoverIcon("/images/Trash.png", 40, 40);
+        SVGPath editIcon = new SVGPath();
+        editIcon.setContent("M4 16.5V20h3.5L17.8 9.7l-3.5-3.5L4 16.5ZM20.7 6.3a1 1 0 0 0 0-1.4l-1.6-1.6a1 1 0 0 0-1.4 0l-1.3 1.3 3.5 3.5 1.3-1.3Z");
+        editIcon.getStyleClass().add("action-icon");
+        editIcon.setScaleX(1.4);
+        editIcon.setScaleY(1.4);
+        editIcon.setMouseTransparent(true);
+
+        StackPane editButton = new StackPane(editIcon);
+        editButton.getStyleClass().add("icon-button");
+        editButton.setPickOnBounds(true);
+        Tooltip.install(editButton, new Tooltip("Rename subtask"));
+
+        SVGPath deleteIcon = new SVGPath();
+        deleteIcon.setContent("M8 6h8M10 6V4h4v2M7 6l1 12h8l1-12M11 9v6M13 9v6");
+        deleteIcon.getStyleClass().add("delete-icon");
+        deleteIcon.setScaleX(1.4);
+        deleteIcon.setScaleY(1.4);
+        deleteIcon.setMouseTransparent(true);
+
+        StackPane deleteButton = new StackPane(deleteIcon);
+        deleteButton.getStyleClass().add("icon-button");
+        deleteButton.setPickOnBounds(true);
+        Tooltip.install(deleteButton, new Tooltip("Delete Subtask"));
 
         row.getChildren().addAll(
                 titleLabel,
@@ -853,7 +891,17 @@ public class frame2Controller {
         Label solutionLabel = new Label("Solution:");
         TextArea solutionField = createVariantTextArea(variant.getSolutionText());
 
-        ImageView deleteButton = createHoverIcon("/images/Trash.png", 40, 40);
+        SVGPath deleteIcon = new SVGPath();
+        deleteIcon.setContent("M8 6h8M10 6V4h4v2M7 6l1 12h8l1-12M11 9v6M13 9v6");
+        deleteIcon.getStyleClass().add("delete-icon");
+        deleteIcon.setScaleX(1.6);
+        deleteIcon.setScaleY(1.6);
+        deleteIcon.setMouseTransparent(true);
+
+        StackPane deleteButton = new StackPane(deleteIcon);
+        deleteButton.getStyleClass().add("icon-button");
+        deleteButton.setPickOnBounds(true);
+        Tooltip.install(deleteButton, new Tooltip("Delete Variant"));
 
         deleteButton.setOnMouseClicked(e -> {
             e.consume();
@@ -1138,8 +1186,29 @@ public class frame2Controller {
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
 
-        ImageView editButton = createHoverIcon("/images/edit.png", 25, 25);
-        ImageView deleteButton = createHoverIcon("/images/Trash.png", 40, 40);
+        SVGPath editIcon = new SVGPath();
+        editIcon.setContent("M4 16.5V20h3.5L17.8 9.7l-3.5-3.5L4 16.5ZM20.7 6.3a1 1 0 0 0 0-1.4l-1.6-1.6a1 1 0 0 0-1.4 0l-1.3 1.3 3.5 3.5 1.3-1.3Z");
+        editIcon.getStyleClass().add("action-icon");
+        editIcon.setScaleX(1.4);
+        editIcon.setScaleY(1.4);
+        editIcon.setMouseTransparent(true);
+
+        StackPane editButton = new StackPane(editIcon);
+        editButton.getStyleClass().add("icon-button");
+        editButton.setPickOnBounds(true);
+        Tooltip.install(editButton, new Tooltip("Rename chapter"));
+
+        SVGPath deleteIcon = new SVGPath();
+        deleteIcon.setContent("M8 6h8M10 6V4h4v2M7 6l1 12h8l1-12M11 9v6M13 9v6");
+        deleteIcon.getStyleClass().add("delete-icon");
+        deleteIcon.setScaleX(1.4);
+        deleteIcon.setScaleY(1.4);
+        deleteIcon.setMouseTransparent(true);
+
+        StackPane deleteButton = new StackPane(deleteIcon);
+        deleteButton.getStyleClass().add("icon-button");
+        deleteButton.setPickOnBounds(true);
+        Tooltip.install(deleteButton, new Tooltip("Delete Chapter"));
 
         chapterRow.getChildren().addAll(
                 titleLabel,

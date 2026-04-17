@@ -267,6 +267,7 @@
     -fx-padding: 0 20 0 20;
     -fx-graphic-text-gap: 12;
     -fx-alignment: CENTER_LEFT;
+    -fx-cursor: hand;
 }
 
 .main-dark-button > .text {
