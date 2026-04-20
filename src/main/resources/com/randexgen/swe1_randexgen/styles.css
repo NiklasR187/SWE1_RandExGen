@@ -336,7 +336,7 @@
 
 .root-pane Label.warning-label {
     -fx-text-fill: #cc8400;
-     -fx-font-size: 15px;
+     -fx-font-size: 12px;
     -fx-font-weight: bold;
 }
 
