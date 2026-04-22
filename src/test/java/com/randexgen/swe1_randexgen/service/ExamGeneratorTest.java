@@ -8,6 +8,7 @@ import com.randexgen.swe1_randexgen.datamodel.ExamType;
 import com.randexgen.swe1_randexgen.datamodel.Subtask;
 import com.randexgen.swe1_randexgen.datamodel.Variant;
 import org.junit.jupiter.api.Test;
+import java.lang.reflect.Method;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +38,51 @@ class ExamGeneratorTest {
     }
 
     /**
+     * Tests whether generation returns an empty list
+     * when the exam is invalid for the selected exam type.
+     */
+    @Test
+    void generateExam_shouldReturnEmptyList_whenExamIsInvalidForSelectedType() {
+        Exam exam = new Exam();
+        exam.setChapters(new ArrayList<>());
+
+        List<GeneratedTask> result = ExamGenerator.generateExam(exam, ExamType.REGULAR);
+
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
+    }
+
+    /**
+     * Tests whether the generator ignores excluded chapters
+     * when generating a regular exam.
+     */
+    @Test
+    void generateExam_shouldIgnoreExcludedChapters_whenGeneratingRegularExam() {
+        Chapter included1 = createValidRegularChapter("included1");
+        Chapter included2 = createValidRegularChapter("included2");
+        Chapter included3 = createValidRegularChapter("included3");
+        Chapter included4 = createValidRegularChapter("included4");
+
+        Chapter excluded = createValidRegularChapter("excluded");
+        excluded.setExamAppearance(ExamAppearance.EXCLUDE);
+
+        Exam exam = new Exam();
+        exam.setChapters(new ArrayList<>(List.of(
+                included1, included2, included3, included4, excluded
+        )));
+
+        List<GeneratedTask> result = ExamGenerator.generateExam(exam, ExamType.REGULAR);
+
+        assertNotNull(result);
+        assertEquals(12, result.size());
+
+        for (GeneratedTask task : result) {
+            assertNotEquals("excluded", task.getChapter().getId());
+        }
+    }
+
+
+    /**
      * Tests whether an empty list is returned when the exam type is null.
      */
     @Test
@@ -50,6 +96,108 @@ class ExamGeneratorTest {
         // Assert
         assertNotNull(result);
         assertTrue(result.isEmpty());
+    }
+
+    /**
+     * Tests whether collectMatchingCombinations adds one match
+     * when a valid combination with the target score exists.
+     */
+    @Test
+    void collectMatchingCombinations_shouldAddMatch_whenCombinationMatchesTargetScore() throws Exception {
+        List<Subtask> pool = new ArrayList<>();
+        pool.add(createUsableSubtask("s1", 2.0, DifficultyLevel.EASY, ExamType.REGULAR));
+        pool.add(createUsableSubtask("s2", 3.0, DifficultyLevel.EASY, ExamType.REGULAR));
+        pool.add(createUsableSubtask("s3", 5.0, DifficultyLevel.EASY, ExamType.REGULAR));
+
+        List<Subtask> current = new ArrayList<>();
+        List<List<Subtask>> matches = new ArrayList<>();
+
+        Method method = ExamGenerator.class.getDeclaredMethod(
+                "collectMatchingCombinations",
+                List.class, int.class, int.class, int.class, List.class, List.class
+        );
+        method.setAccessible(true);
+
+        // 2 subtasks, target score = 5 -> should find [2 + 3]
+        method.invoke(null, pool, 2, 5, 0, current, matches);
+
+        assertEquals(1, matches.size());
+        assertEquals(2, matches.get(0).size());
+    }
+
+    /**
+     * Tests whether collectMatchingCombinations adds no match
+     * when no valid score combination exists.
+     */
+    @Test
+    void collectMatchingCombinations_shouldAddNoMatch_whenNoCombinationMatchesTargetScore() throws Exception {
+        List<Subtask> pool = new ArrayList<>();
+        pool.add(createUsableSubtask("s1", 1.0, DifficultyLevel.EASY, ExamType.REGULAR));
+        pool.add(createUsableSubtask("s2", 1.0, DifficultyLevel.EASY, ExamType.REGULAR));
+        pool.add(createUsableSubtask("s3", 1.0, DifficultyLevel.EASY, ExamType.REGULAR));
+
+        List<Subtask> current = new ArrayList<>();
+        List<List<Subtask>> matches = new ArrayList<>();
+
+        Method method = ExamGenerator.class.getDeclaredMethod(
+                "collectMatchingCombinations",
+                List.class, int.class, int.class, int.class, List.class, List.class
+        );
+        method.setAccessible(true);
+
+        // No combination of 2 subtasks can reach score 5
+        method.invoke(null, pool, 2, 5, 0, current, matches);
+
+        assertTrue(matches.isEmpty());
+    }
+
+    /**
+     * Tests whether collectMatchingCombinations stops correctly
+     * when the index is already outside the pool.
+     */
+    @Test
+    void collectMatchingCombinations_shouldStop_whenIndexIsOutsidePool() throws Exception {
+        List<Subtask> pool = new ArrayList<>();
+        pool.add(createUsableSubtask("s1", 2.0, DifficultyLevel.EASY, ExamType.REGULAR));
+
+        List<Subtask> current = new ArrayList<>();
+        List<List<Subtask>> matches = new ArrayList<>();
+
+        Method method = ExamGenerator.class.getDeclaredMethod(
+                "collectMatchingCombinations",
+                List.class, int.class, int.class, int.class, List.class, List.class
+        );
+        method.setAccessible(true);
+
+        // index == pool.size() -> should immediately return
+        method.invoke(null, pool, 1, 2, pool.size(), current, matches);
+
+        assertTrue(matches.isEmpty());
+    }
+
+    /**
+     * Tests whether collectMatchingCombinations checks the current combination
+     * immediately when remaining is zero.
+     */
+    @Test
+    void collectMatchingCombinations_shouldCheckCurrentCombination_whenRemainingIsZero() throws Exception {
+        List<Subtask> pool = new ArrayList<>();
+        List<Subtask> current = new ArrayList<>();
+        current.add(createUsableSubtask("s1", 4.0, DifficultyLevel.EASY, ExamType.REGULAR));
+
+        List<List<Subtask>> matches = new ArrayList<>();
+
+        Method method = ExamGenerator.class.getDeclaredMethod(
+                "collectMatchingCombinations",
+                List.class, int.class, int.class, int.class, List.class, List.class
+        );
+        method.setAccessible(true);
+
+        // remaining == 0 -> method only checks current score
+        method.invoke(null, pool, 0, 4, 0, current, matches);
+
+        assertEquals(1, matches.size());
+        assertEquals(1, matches.get(0).size());
     }
 
     /**

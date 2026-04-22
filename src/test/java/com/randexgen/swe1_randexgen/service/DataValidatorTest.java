@@ -44,6 +44,100 @@ class DataValidatorTest {
     }
 
     /**
+     * Tests whether getWarningText returns a warning
+     * when a chapter is invalid for the regular exam only.
+     */
+    @Test
+    void getWarningText_shouldReturnRegularWarning_whenChapterIsOnlyValidForPractice() {
+        Chapter chapter = createIncludedValidChapter(ExamType.PRACTICE);
+
+        String warning = DataValidator.getWarningText(chapter);
+
+        assertEquals("⚠ Invalid for Regular Exam", warning);
+    }
+
+    /**
+     * Tests whether getWarningText returns a warning
+     * when a chapter is invalid for the practice exam only.
+     */
+    @Test
+    void getWarningText_shouldReturnPracticeWarning_whenChapterIsOnlyValidForRegular() {
+        Chapter chapter = createIncludedValidChapter(ExamType.REGULAR);
+
+        String warning = DataValidator.getWarningText(chapter);
+
+        assertEquals("⚠ Invalid for Practice Exam", warning);
+    }
+
+    /**
+     * Tests whether getExamWarningText returns a warning
+     * when the exam is valid for practice only.
+     */
+    @Test
+    void getExamWarningText_shouldReturnRegularWarning_whenExamIsOnlyValidForPractice() {
+        Exam exam = new Exam();
+        exam.setChapters(new ArrayList<>(List.of(
+                createIncludedValidChapter(ExamType.PRACTICE),
+                createIncludedValidChapter(ExamType.PRACTICE),
+                createIncludedValidChapter(ExamType.PRACTICE),
+                createIncludedValidChapter(ExamType.PRACTICE)
+        )));
+
+        String warning = DataValidator.getExamWarningText(exam);
+
+        assertEquals("⚠ Exam invalid for Regular Exam", warning);
+    }
+
+    /**
+     * Tests whether getExamWarningText returns a warning
+     * when the exam is valid for regular only.
+     */
+    @Test
+    void getExamWarningText_shouldReturnPracticeWarning_whenExamIsOnlyValidForRegular() {
+        Exam exam = new Exam();
+        exam.setChapters(new ArrayList<>(List.of(
+                createIncludedValidChapter(ExamType.REGULAR),
+                createIncludedValidChapter(ExamType.REGULAR),
+                createIncludedValidChapter(ExamType.REGULAR),
+                createIncludedValidChapter(ExamType.REGULAR)
+        )));
+
+        String warning = DataValidator.getExamWarningText(exam);
+
+        assertEquals("⚠ Exam invalid for Practice Exam", warning);
+    }
+
+    /**
+     * Tests whether getExamWarningText returns the combined warning
+     * when enough chapters are included but both exam types are invalid.
+     */
+    @Test
+    void getExamWarningText_shouldReturnBothInvalidWarning_whenEnoughChaptersButBothTypesInvalid() {
+        Chapter invalid1 = new Chapter();
+        invalid1.setExamAppearance(ExamAppearance.INCLUDE);
+        invalid1.setSubtasks(new ArrayList<>());
+
+        Chapter invalid2 = new Chapter();
+        invalid2.setExamAppearance(ExamAppearance.INCLUDE);
+        invalid2.setSubtasks(new ArrayList<>());
+
+        Chapter invalid3 = new Chapter();
+        invalid3.setExamAppearance(ExamAppearance.INCLUDE);
+        invalid3.setSubtasks(new ArrayList<>());
+
+        Chapter invalid4 = new Chapter();
+        invalid4.setExamAppearance(ExamAppearance.INCLUDE);
+        invalid4.setSubtasks(new ArrayList<>());
+
+        Exam exam = new Exam();
+        exam.setChapters(new ArrayList<>(List.of(invalid1, invalid2, invalid3, invalid4)));
+
+        String warning = DataValidator.getExamWarningText(exam);
+
+        assertEquals("⚠ Exam invalid for Practice + Regular Exam", warning);
+    }
+
+    /**
      * Tests whether a subtask is unusable when it has no variants.
      */
     @Test

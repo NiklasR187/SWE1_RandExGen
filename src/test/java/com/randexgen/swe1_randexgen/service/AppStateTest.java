@@ -30,6 +30,22 @@ class AppStateTest {
     }
 
     /**
+     * Tests whether setting and retrieving the current exam
+     * and XML file works correctly.
+     */
+    @Test
+    void setAndGet_shouldWork() {
+        Exam exam = new Exam();
+        java.io.File file = new java.io.File("test.xml");
+
+        AppState.setCurrentExam(exam);
+        AppState.setCurrentXmlFile(file);
+
+        assertSame(exam, AppState.getCurrentExam());
+        assertEquals(file, AppState.getCurrentXmlFile());
+    }
+
+    /**
      * Tests whether setting and getting the XML file works correctly.
      */
     @Test
